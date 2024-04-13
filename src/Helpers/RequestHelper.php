@@ -88,6 +88,6 @@ class RequestHelper
             return [];
         }
 
-        return ['Authorization' => 'Brear ' . $this->token];
+        return ['Authorization' => 'Bearer ' . $this->token];
     }
 }

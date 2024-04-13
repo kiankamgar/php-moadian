@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
 
-class RandomChallengeResponse implements ModelInterface
+class RandomChallengeModel implements ModelInterface
 {
     private string $nonce;
     private string $expDate;
