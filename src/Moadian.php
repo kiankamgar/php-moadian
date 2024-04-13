@@ -13,6 +13,7 @@ use KianKamgar\MoadianPhp\Models\ServerInformationModel;
 use KianKamgar\MoadianPhp\Models\TaxPayerModel;
 use KianKamgar\MoadianPhp\Services\FiscalInformation;
 use KianKamgar\MoadianPhp\Services\InquiryByReferenceId;
+use KianKamgar\MoadianPhp\Services\InquiryByUid;
 use KianKamgar\MoadianPhp\Services\RandomChallenge;
 use KianKamgar\MoadianPhp\Services\ServerInformation;
 use KianKamgar\MoadianPhp\Services\SignNonce;
@@ -29,7 +30,7 @@ class Moadian
     public function __construct(
         private string $privateKeyPath,
         private string $certificatePath,
-        private string $clientId,
+        private string $memoryId,
         private string $economicCode,
     )
     {
@@ -50,7 +51,7 @@ class Moadian
      */
     public function getFiscalInformation(): FiscalInformationModel
     {
-        return (new FiscalInformation($this->clientId))->request($this->getToken());
+        return (new FiscalInformation($this->memoryId))->request($this->getToken());
     }
 
     /**
@@ -72,6 +73,15 @@ class Moadian
 
     /**
      * @throws GuzzleException
+     */
+    public function getInquiryByUid(array $uidList, string $memoryId, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
+    {
+        return (new InquiryByUid($uidList, $memoryId, $start, $end))
+            ->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
      * @throws Exception
      */
     private function getToken(): string
@@ -81,7 +91,7 @@ class Moadian
             $this->privateKey,
             $this->certificate,
             $randomChallenge->getNonce(),
-            $this->clientId
+            $this->memoryId
         );
 
         return $signNonce->getToken();
