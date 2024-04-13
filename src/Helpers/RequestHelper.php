@@ -1,13 +1,13 @@
 <?php
 
-namespace KianKamgar\MoadianPhp\Services;
+namespace KianKamgar\MoadianPhp\Helpers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class Request
+class RequestHelper
 {
     private string $url;
     private string $model;
@@ -40,7 +40,7 @@ class Request
         return $this->getDecodedResponseArray();
     }
 
-    public function setToken(?string $token): Request
+    public function setToken(?string $token): RequestHelper
     {
         $this->token = $token;
         return $this;
