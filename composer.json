@@ -18,6 +18,7 @@
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.5",
         "ext-json": "*",
-        "ext-openssl": "*"
+        "ext-openssl": "*",
+        "ext-ctype": "*"
     }
 }
