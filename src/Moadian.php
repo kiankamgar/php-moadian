@@ -5,8 +5,10 @@ namespace KianKamgar\MoadianPhp;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Helpers\SignHelper;
+use KianKamgar\MoadianPhp\Models\FiscalInformationModel;
 use KianKamgar\MoadianPhp\Models\RandomChallengeModel;
 use KianKamgar\MoadianPhp\Models\ServerInformationModel;
+use KianKamgar\MoadianPhp\Services\FiscalInformation;
 use KianKamgar\MoadianPhp\Services\RandomChallenge;
 use KianKamgar\MoadianPhp\Services\ServerInformation;
 use KianKamgar\MoadianPhp\Services\SignNonce;
@@ -36,6 +38,14 @@ class Moadian
     public function getServerInformation(): ServerInformationModel
     {
         return (new ServerInformation())->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getFiscalInformation(): FiscalInformationModel
+    {
+        return (new FiscalInformation($this->clientId))->request($this->getToken());
     }
 
     /**
