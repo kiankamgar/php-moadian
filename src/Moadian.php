@@ -8,10 +8,12 @@ use KianKamgar\MoadianPhp\Helpers\SignHelper;
 use KianKamgar\MoadianPhp\Models\FiscalInformationModel;
 use KianKamgar\MoadianPhp\Models\RandomChallengeModel;
 use KianKamgar\MoadianPhp\Models\ServerInformationModel;
+use KianKamgar\MoadianPhp\Models\TaxPayerModel;
 use KianKamgar\MoadianPhp\Services\FiscalInformation;
 use KianKamgar\MoadianPhp\Services\RandomChallenge;
 use KianKamgar\MoadianPhp\Services\ServerInformation;
 use KianKamgar\MoadianPhp\Services\SignNonce;
+use KianKamgar\MoadianPhp\Services\TaxPayer;
 
 class Moadian
 {
@@ -46,6 +48,14 @@ class Moadian
     public function getFiscalInformation(): FiscalInformationModel
     {
         return (new FiscalInformation($this->clientId))->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getTaxPayer(): TaxPayerModel
+    {
+        return (new TaxPayer($this->economicCode))->request($this->getToken());
     }
 
     /**
