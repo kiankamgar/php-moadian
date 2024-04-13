@@ -13,6 +13,7 @@ use KianKamgar\MoadianPhp\Models\ServerInformationModel;
 use KianKamgar\MoadianPhp\Models\TaxPayerModel;
 use KianKamgar\MoadianPhp\Services\FiscalInformation;
 use KianKamgar\MoadianPhp\Services\InquiryByReferenceId;
+use KianKamgar\MoadianPhp\Services\InquiryByTime;
 use KianKamgar\MoadianPhp\Services\InquiryByUid;
 use KianKamgar\MoadianPhp\Services\RandomChallenge;
 use KianKamgar\MoadianPhp\Services\ServerInformation;
@@ -77,6 +78,15 @@ class Moadian
     public function getInquiryByUid(array $uidList, string $memoryId, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
     {
         return (new InquiryByUid($uidList, $memoryId, $start, $end))
+            ->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getInquiryByTime(int $pageNumber = 1, int $pageSize = 10, ?string $status = null, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
+    {
+        return (new InquiryByTime($pageNumber, $pageSize, $status, $start, $end))
             ->request($this->getToken());
     }
 

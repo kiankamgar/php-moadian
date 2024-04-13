@@ -11,4 +11,5 @@ class Url
     protected const TAX_PAYER_URL = self::BASE_URL . 'taxpayer';
     protected const INQUIRY_BY_REFERENCE_ID_URL = self::BASE_URL . 'inquiry-by-reference-id';
     protected const INQUIRY_BY_UID_URL = self::BASE_URL . 'inquiry-by-uid';
+    protected const INQUIRY_BY_TIME_URL = self::BASE_URL . 'inquiry';
 }
