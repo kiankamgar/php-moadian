@@ -2,14 +2,17 @@
 
 namespace KianKamgar\MoadianPhp;
 
+use DateTime;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Helpers\SignHelper;
 use KianKamgar\MoadianPhp\Models\FiscalInformationModel;
+use KianKamgar\MoadianPhp\Models\InquiryResponseModel;
 use KianKamgar\MoadianPhp\Models\RandomChallengeModel;
 use KianKamgar\MoadianPhp\Models\ServerInformationModel;
 use KianKamgar\MoadianPhp\Models\TaxPayerModel;
 use KianKamgar\MoadianPhp\Services\FiscalInformation;
+use KianKamgar\MoadianPhp\Services\InquiryByReferenceId;
 use KianKamgar\MoadianPhp\Services\RandomChallenge;
 use KianKamgar\MoadianPhp\Services\ServerInformation;
 use KianKamgar\MoadianPhp\Services\SignNonce;
@@ -56,6 +59,15 @@ class Moadian
     public function getTaxPayer(): TaxPayerModel
     {
         return (new TaxPayer($this->economicCode))->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getInquiryByReferenceIds(array $referenceIds, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
+    {
+        return (new InquiryByReferenceId($referenceIds, $start, $end))
+            ->request($this->getToken());
     }
 
     /**

@@ -25,7 +25,7 @@ class RequestHelper
     /**
      * @throws GuzzleException
      */
-    public function get(array $requestParams = []): ModelInterface
+    public function get(array|string $requestParams = []): ModelInterface
     {
         $this->response = $this->client->request('GET', $this->url, [
             'query'   => $requestParams,
