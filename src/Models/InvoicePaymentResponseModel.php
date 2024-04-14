@@ -2,9 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
-
-class InvoicePaymentModel implements ModelInterface
+class InvoicePaymentResponseModel
 {
     public string $iinn;
     public string $acn;
@@ -21,7 +19,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->iinn;
     }
 
-    public function setIinn(string $iinn): InvoicePaymentModel
+    public function setIinn(string $iinn): InvoicePaymentResponseModel
     {
         $this->iinn = $iinn;
         return $this;
@@ -32,7 +30,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->acn;
     }
 
-    public function setAcn(string $acn): InvoicePaymentModel
+    public function setAcn(string $acn): InvoicePaymentResponseModel
     {
         $this->acn = $acn;
         return $this;
@@ -43,7 +41,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->trmn;
     }
 
-    public function setTrmn(string $trmn): InvoicePaymentModel
+    public function setTrmn(string $trmn): InvoicePaymentResponseModel
     {
         $this->trmn = $trmn;
         return $this;
@@ -54,7 +52,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->trn;
     }
 
-    public function setTrn(string $trn): InvoicePaymentModel
+    public function setTrn(string $trn): InvoicePaymentResponseModel
     {
         $this->trn = $trn;
         return $this;
@@ -65,7 +63,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->pcn;
     }
 
-    public function setPcn(string $pcn): InvoicePaymentModel
+    public function setPcn(string $pcn): InvoicePaymentResponseModel
     {
         $this->pcn = $pcn;
         return $this;
@@ -76,7 +74,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->pid;
     }
 
-    public function setPid(string $pid): InvoicePaymentModel
+    public function setPid(string $pid): InvoicePaymentResponseModel
     {
         $this->pid = $pid;
         return $this;
@@ -87,7 +85,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->pdt;
     }
 
-    public function setPdt(?string $pdt): InvoicePaymentModel
+    public function setPdt(?string $pdt): InvoicePaymentResponseModel
     {
         $this->pdt = $pdt;
         return $this;
@@ -98,7 +96,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->pmt;
     }
 
-    public function setPmt(?int $pmt): InvoicePaymentModel
+    public function setPmt(?int $pmt): InvoicePaymentResponseModel
     {
         $this->pmt = $pmt;
         return $this;
@@ -109,7 +107,7 @@ class InvoicePaymentModel implements ModelInterface
         return $this->pv;
     }
 
-    public function setPv(?string $pv): InvoicePaymentModel
+    public function setPv(?string $pv): InvoicePaymentResponseModel
     {
         $this->pv = $pv;
         return $this;

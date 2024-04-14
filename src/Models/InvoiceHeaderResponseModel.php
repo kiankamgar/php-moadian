@@ -4,9 +4,8 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use DateTime;
 use KianKamgar\MoadianPhp\Helpers\VerhoeffAlgorithm;
-use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
 
-class InvoiceHeaderModel implements ModelInterface
+class InvoiceHeaderResponseModel
 {
     public ?string $indati2m;
     public ?string $indatim;
@@ -53,7 +52,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->indati2m;
     }
 
-    public function setIndati2m(DateTime $indati2m): InvoiceHeaderModel
+    public function setIndati2m(DateTime $indati2m): InvoiceHeaderResponseModel
     {
         $this->indati2m = $this->getFormattedDate($indati2m);
         return $this;
@@ -69,7 +68,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->inty;
     }
 
-    public function setInty(?int $invoiceType): InvoiceHeaderModel
+    public function setInty(?int $invoiceType): InvoiceHeaderResponseModel
     {
         $this->inty = $invoiceType;
         return $this;
@@ -80,7 +79,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->ft;
     }
 
-    public function setFt(?int $ft): InvoiceHeaderModel
+    public function setFt(?int $ft): InvoiceHeaderResponseModel
     {
         $this->ft = $ft;
         return $this;
@@ -91,7 +90,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->inno;
     }
 
-    public function setInno(string $inno): InvoiceHeaderModel
+    public function setInno(string $inno): InvoiceHeaderResponseModel
     {
         $this->inno = $inno;
         return $this;
@@ -102,7 +101,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->irtaxid;
     }
 
-    public function setIrtaxid(string $irtaxid): InvoiceHeaderModel
+    public function setIrtaxid(string $irtaxid): InvoiceHeaderResponseModel
     {
         $this->irtaxid = $irtaxid;
         return $this;
@@ -113,7 +112,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->scln;
     }
 
-    public function setScln(string $scln): InvoiceHeaderModel
+    public function setScln(string $scln): InvoiceHeaderResponseModel
     {
         $this->scln = $scln;
         return $this;
@@ -124,7 +123,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->setm;
     }
 
-    public function setSetm(?int $setm): InvoiceHeaderModel
+    public function setSetm(?int $setm): InvoiceHeaderResponseModel
     {
         $this->setm = $setm;
         return $this;
@@ -135,7 +134,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tins;
     }
 
-    public function setTins(string $tins): InvoiceHeaderModel
+    public function setTins(string $tins): InvoiceHeaderResponseModel
     {
         $this->tins = $tins;
         return $this;
@@ -146,7 +145,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->cap;
     }
 
-    public function setCap(?string $cap): InvoiceHeaderModel
+    public function setCap(?string $cap): InvoiceHeaderResponseModel
     {
         $this->cap = $cap;
         return $this;
@@ -157,7 +156,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->bid;
     }
 
-    public function setBid(string $bid): InvoiceHeaderModel
+    public function setBid(string $bid): InvoiceHeaderResponseModel
     {
         $this->bid = $bid;
         return $this;
@@ -168,7 +167,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->insp;
     }
 
-    public function setInsp(?string $insp): InvoiceHeaderModel
+    public function setInsp(?string $insp): InvoiceHeaderResponseModel
     {
         $this->insp = $insp;
         return $this;
@@ -179,7 +178,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tvop;
     }
 
-    public function setTvop(?string $tvop): InvoiceHeaderModel
+    public function setTvop(?string $tvop): InvoiceHeaderResponseModel
     {
         $this->tvop = $tvop;
         return $this;
@@ -190,7 +189,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->bpc;
     }
 
-    public function setBpc(string $bpc): InvoiceHeaderModel
+    public function setBpc(string $bpc): InvoiceHeaderResponseModel
     {
         $this->bpc = $bpc;
         return $this;
@@ -201,7 +200,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tax17;
     }
 
-    public function setTax17(?string $tax17): InvoiceHeaderModel
+    public function setTax17(?string $tax17): InvoiceHeaderResponseModel
     {
         $this->tax17 = $tax17;
         return $this;
@@ -212,7 +211,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->taxid;
     }
 
-    public function setTaxid(string $taxid): InvoiceHeaderModel
+    public function setTaxid(string $taxid): InvoiceHeaderResponseModel
     {
         $this->taxid = $taxid;
         return $this;
@@ -223,7 +222,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->inp;
     }
 
-    public function setInp(?int $inp): InvoiceHeaderModel
+    public function setInp(?int $inp): InvoiceHeaderResponseModel
     {
         $this->inp = $inp;
         return $this;
@@ -234,7 +233,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->scc;
     }
 
-    public function setScc(string $scc): InvoiceHeaderModel
+    public function setScc(string $scc): InvoiceHeaderResponseModel
     {
         $this->scc = $scc;
         return $this;
@@ -245,7 +244,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->ins;
     }
 
-    public function setIns(?int $ins): InvoiceHeaderModel
+    public function setIns(?int $ins): InvoiceHeaderResponseModel
     {
         $this->ins = $ins;
         return $this;
@@ -256,7 +255,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->billid;
     }
 
-    public function setBillid(string $billid): InvoiceHeaderModel
+    public function setBillid(string $billid): InvoiceHeaderResponseModel
     {
         $this->billid = $billid;
         return $this;
@@ -267,7 +266,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tprdis;
     }
 
-    public function setTprdis(?string $tprdis): InvoiceHeaderModel
+    public function setTprdis(?string $tprdis): InvoiceHeaderResponseModel
     {
         $this->tprdis = $tprdis;
         return $this;
@@ -278,7 +277,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tdis;
     }
 
-    public function setTdis(?string $tdis): InvoiceHeaderModel
+    public function setTdis(?string $tdis): InvoiceHeaderResponseModel
     {
         $this->tdis = $tdis;
         return $this;
@@ -289,7 +288,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tadis;
     }
 
-    public function setTadis(?string $tadis): InvoiceHeaderModel
+    public function setTadis(?string $tadis): InvoiceHeaderResponseModel
     {
         $this->tadis = $tadis;
         return $this;
@@ -300,7 +299,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tvam;
     }
 
-    public function setTvam(?string $tvam): InvoiceHeaderModel
+    public function setTvam(?string $tvam): InvoiceHeaderResponseModel
     {
         $this->tvam = $tvam;
         return $this;
@@ -311,7 +310,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->todam;
     }
 
-    public function setTodam(?string $todam): InvoiceHeaderModel
+    public function setTodam(?string $todam): InvoiceHeaderResponseModel
     {
         $this->todam = $todam;
         return $this;
@@ -322,7 +321,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tbill;
     }
 
-    public function setTbill(?string $tbill): InvoiceHeaderModel
+    public function setTbill(?string $tbill): InvoiceHeaderResponseModel
     {
         $this->tbill = $tbill;
         return $this;
@@ -333,7 +332,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tob;
     }
 
-    public function setTob(?int $tob): InvoiceHeaderModel
+    public function setTob(?int $tob): InvoiceHeaderResponseModel
     {
         $this->tob = $tob;
         return $this;
@@ -344,7 +343,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tinb;
     }
 
-    public function setTinb(string $tinb): InvoiceHeaderModel
+    public function setTinb(string $tinb): InvoiceHeaderResponseModel
     {
         $this->tinb = $tinb;
         return $this;
@@ -355,7 +354,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->sbc;
     }
 
-    public function setSbc(string $sbc): InvoiceHeaderModel
+    public function setSbc(string $sbc): InvoiceHeaderResponseModel
     {
         $this->sbc = $sbc;
         return $this;
@@ -366,7 +365,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->bbc;
     }
 
-    public function setBbc(string $bbc): InvoiceHeaderModel
+    public function setBbc(string $bbc): InvoiceHeaderResponseModel
     {
         $this->bbc = $bbc;
         return $this;
@@ -377,7 +376,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->bpn;
     }
 
-    public function setBpn(string $bpn): InvoiceHeaderModel
+    public function setBpn(string $bpn): InvoiceHeaderResponseModel
     {
         $this->bpn = $bpn;
         return $this;
@@ -388,7 +387,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->crn;
     }
 
-    public function setCrn(string $crn): InvoiceHeaderModel
+    public function setCrn(string $crn): InvoiceHeaderResponseModel
     {
         $this->crn = $crn;
         return $this;
@@ -399,7 +398,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->cdcn;
     }
 
-    public function setCdcn(string $cdcn): InvoiceHeaderModel
+    public function setCdcn(string $cdcn): InvoiceHeaderResponseModel
     {
         $this->cdcn = $cdcn;
         return $this;
@@ -410,7 +409,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->cdcd;
     }
 
-    public function setCdcd(?int $cdcd): InvoiceHeaderModel
+    public function setCdcd(?int $cdcd): InvoiceHeaderResponseModel
     {
         $this->cdcd = $cdcd;
         return $this;
@@ -421,7 +420,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tonw;
     }
 
-    public function setTonw(?float $tonw): InvoiceHeaderModel
+    public function setTonw(?float $tonw): InvoiceHeaderResponseModel
     {
         $this->tonw = $tonw;
         return $this;
@@ -432,7 +431,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->torv;
     }
 
-    public function setTorv(?string $torv): InvoiceHeaderModel
+    public function setTorv(?string $torv): InvoiceHeaderResponseModel
     {
         $this->torv = $torv;
         return $this;
@@ -443,7 +442,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tocv;
     }
 
-    public function setTocv(?float $tocv): InvoiceHeaderModel
+    public function setTocv(?float $tocv): InvoiceHeaderResponseModel
     {
         $this->tocv = $tocv;
         return $this;
@@ -454,7 +453,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->tinc;
     }
 
-    public function setTinc(string $tinc): InvoiceHeaderModel
+    public function setTinc(string $tinc): InvoiceHeaderResponseModel
     {
         $this->tinc = $tinc;
         return $this;
@@ -465,7 +464,7 @@ class InvoiceHeaderModel implements ModelInterface
         return $this->memoryId;
     }
 
-    public function setMemoryId(string $memoryId): InvoiceHeaderModel
+    public function setMemoryId(string $memoryId): InvoiceHeaderResponseModel
     {
         $this->memoryId = $memoryId;
         return $this;

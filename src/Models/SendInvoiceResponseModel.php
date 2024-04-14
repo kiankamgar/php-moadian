@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class SendInvoiceModel implements ModelInterface
+class SendInvoiceResponseModel implements ResponseModelInterface
 {
     private string $timestamp;
     private array $result;
@@ -12,11 +12,6 @@ class SendInvoiceModel implements ModelInterface
     public function getTimestamp(): string
     {
         return $this->timestamp;
-    }
-
-    public function setTimestamp(string $timestamp): void
-    {
-        $this->timestamp = $timestamp;
     }
 
     public function getResult(): array
@@ -30,7 +25,7 @@ class SendInvoiceModel implements ModelInterface
 
         foreach ($data as $item) {
 
-            $sendInvoiceResult = new SendInvoiceResultModel();
+            $sendInvoiceResult = new SendInvoiceResultResponseModel();
             $sendInvoiceResult->setUid($item['uid']);
             $sendInvoiceResult->setPacketType($item['packetType']);
             $sendInvoiceResult->setReferenceNumber($item['referenceNumber']);
@@ -40,5 +35,18 @@ class SendInvoiceModel implements ModelInterface
         }
 
         $this->result = $result;
+    }
+
+    public function decodeResponse(array $response): ResponseModelInterface
+    {
+        $this->timestamp = $response['timestamp'];
+        $this->result = [];
+
+        foreach ($response['result'] as $item) {
+
+            $this->result[] = (new SendInvoiceResultResponseModel())->decodeResponse($item);
+        }
+
+        return $this;
     }
 }

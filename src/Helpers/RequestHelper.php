@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Helpers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class RequestHelper
@@ -13,7 +13,7 @@ class RequestHelper
     private string $model;
     private ?string $token = null;
     private Client $client;
-    private bool $jsonResponse = false;
+    private bool $arrayResponse = false;
 
     public function __construct(string $url, string $model)
     {
@@ -25,7 +25,7 @@ class RequestHelper
     /**
      * @throws GuzzleException
      */
-    public function get(array|string $requestParams = []): ModelInterface|string
+    public function get(array|string $requestParams = []): ResponseModelInterface|array
     {
         $response = $this->client->request('GET', $this->url, [
             'query'   => $requestParams,
@@ -38,7 +38,7 @@ class RequestHelper
     /**
      * @throws GuzzleException
      */
-    public function post(array $body = []): ModelInterface|string
+    public function post(array $body = []): ResponseModelInterface|array
     {
         $response = $this->client->request('POST', $this->url, [
             'headers' => $this->getAuthorizationHeader(),
@@ -54,24 +54,24 @@ class RequestHelper
         return $this;
     }
 
-    public function jsonResponse(bool $jsonResponse): RequestHelper
+    public function arrayResponse(bool $arrayResponse): RequestHelper
     {
-        $this->jsonResponse = $jsonResponse;
+        $this->arrayResponse = $arrayResponse;
         return $this;
     }
 
-    private function getResponse(ResponseInterface $response): ModelInterface|string
+    private function getResponse(ResponseInterface $response): ResponseModelInterface|array
     {
-        $content = $response->getBody()->getContents();
+        $arrayResponse = json_decode($response->getBody()->getContents(), true);
 
         if (!$this->isOk($response)) {
 
-            return $this->jsonResponse ? $content : (new $this->model());
+            return $this->arrayResponse ? $arrayResponse : (new $this->model());
         }
 
-        return $this->jsonResponse
-            ? $content
-            : $this->getDecodedResponseArray($content);
+        return $this->arrayResponse
+            ? $arrayResponse
+            : $this->getModelResponse($arrayResponse);
     }
 
     private function isOk(ResponseInterface $response): bool
@@ -79,24 +79,9 @@ class RequestHelper
         return !($response->getStatusCode() < 200 || $response->getStatusCode() >= 300);
     }
 
-    private function getDecodedResponseArray(string $responseJson): ModelInterface
+    private function getModelResponse(array $responseArray): ResponseModelInterface
     {
-        $responseArray = json_decode($responseJson, true);
-        $model = new $this->model();
-
-        foreach ($responseArray as $key => $value) {
-
-            $method = 'set' . ucfirst($key);
-
-            if (!method_exists($model, $method)) {
-
-                continue;
-            }
-
-            $model->$method($value);
-        }
-
-        return $model;
+        return (new $this->model())->decodeResponse($responseArray);
     }
 
     private function init(): void

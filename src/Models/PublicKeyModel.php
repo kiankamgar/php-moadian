@@ -2,7 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-class PublicKeyModel
+use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+
+class PublicKeyModel implements ResponseModelInterface
 {
     private string $key;
     private string $id;
@@ -14,19 +16,9 @@ class PublicKeyModel
         return $this->key;
     }
 
-    public function setKey(string $key): void
-    {
-        $this->key = $key;
-    }
-
     public function getId(): string
     {
         return $this->id;
-    }
-
-    public function setId(string $id): void
-    {
-        $this->id = $id;
     }
 
     public function getAlgorithm(): string
@@ -34,18 +26,18 @@ class PublicKeyModel
         return $this->algorithm;
     }
 
-    public function setAlgorithm(string $algorithm): void
-    {
-        $this->algorithm = $algorithm;
-    }
-
     public function getPurpose(): int
     {
         return $this->purpose;
     }
 
-    public function setPurpose(int $purpose): void
+    public function decodeResponse(array $response): ResponseModelInterface
     {
-        $this->purpose = $purpose;
+        $this->key = $response['key'];
+        $this->id = $response['id'];
+        $this->algorithm = $response['algorithm'];
+        $this->purpose = $response['purpose'];
+
+        return $this;
     }
 }

@@ -2,9 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
-
-class InvoiceModel implements ModelInterface
+class InvoiceResponseModel
 {
     private array $header;
     private array $body;
@@ -16,7 +14,7 @@ class InvoiceModel implements ModelInterface
         return $this->header;
     }
 
-    public function setHeader(array $header): InvoiceModel
+    public function setHeader(array $header): InvoiceResponseModel
     {
         $this->header = $header;
         return $this;
@@ -27,7 +25,7 @@ class InvoiceModel implements ModelInterface
         return $this->body;
     }
 
-    public function setBody(array $body): InvoiceModel
+    public function setBody(array $body): InvoiceResponseModel
     {
         $this->body = $body;
         return $this;
@@ -38,7 +36,7 @@ class InvoiceModel implements ModelInterface
         return $this->payments;
     }
 
-    public function setPayments(array $payments): InvoiceModel
+    public function setPayments(array $payments): InvoiceResponseModel
     {
         $this->payments = $payments;
         return $this;
@@ -49,7 +47,7 @@ class InvoiceModel implements ModelInterface
         return $this->extension;
     }
 
-    public function setExtension(array $extension): InvoiceModel
+    public function setExtension(array $extension): InvoiceResponseModel
     {
         $this->extension = $extension;
         return $this;

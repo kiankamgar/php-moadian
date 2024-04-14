@@ -11,26 +11,26 @@ use KianKamgar\MoadianPhp\Consts\Url;
 use KianKamgar\MoadianPhp\Helpers\RequestHelper;
 use KianKamgar\MoadianPhp\Helpers\SignHelper;
 use KianKamgar\MoadianPhp\Models\PublicKeyModel;
-use KianKamgar\MoadianPhp\Models\SendInvoiceResultModel;
+use KianKamgar\MoadianPhp\Models\SendInvoiceResponseModel;
 use phpseclib3\Crypt\AES;
 use phpseclib3\Crypt\Random;
 use phpseclib3\Crypt\RSA;
 
 class SendInvoice extends Url
 {
-    private array $invoices;
-    private PublicKeyModel $key;
     private RequestHelper $requestHelper;
 
     public function __construct(
         private string $privateKey,
         private string $x5c,
         private string $fiscalId,
+        private PublicKeyModel $key,
+        private array $invoices,
     )
     {
         $this->requestHelper = new RequestHelper(
             self::SEND_INVOICE_URL,
-            SendInvoiceResultModel::class
+            SendInvoiceResponseModel::class
         );
     }
 
@@ -38,19 +38,16 @@ class SendInvoice extends Url
      * @throws GuzzleException
      * @throws Exception
      */
-    public function request(array $invoices, PublicKeyModel $key, string $token): SendInvoiceResultModel|string
+    public function request(string $token): SendInvoiceResponseModel|array
     {
-        $this->invoices = $invoices;
-        $this->key = $key;
-
         return $this->requestHelper
             ->setToken($token)
             ->post($this->getInvoicePackets());
     }
 
-    public function jsonResponse(bool $json): SendInvoice
+    public function arrayResponse(bool $arrayResponse): SendInvoice
     {
-        $this->requestHelper->jsonResponse($json);
+        $this->requestHelper->arrayResponse($arrayResponse);
         return $this;
     }
 

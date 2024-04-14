@@ -6,14 +6,14 @@ use DateTime;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Helpers\SignHelper;
-use KianKamgar\MoadianPhp\Models\FiscalInformationModel;
-use KianKamgar\MoadianPhp\Models\InquiryResponseModel;
-use KianKamgar\MoadianPhp\Models\InvoiceHeaderModel;
-use KianKamgar\MoadianPhp\Models\InvoiceModel;
-use KianKamgar\MoadianPhp\Models\RandomChallengeModel;
-use KianKamgar\MoadianPhp\Models\SendInvoiceResultModel;
-use KianKamgar\MoadianPhp\Models\ServerInformationModel;
-use KianKamgar\MoadianPhp\Models\TaxPayerModel;
+use KianKamgar\MoadianPhp\Models\FiscalInformationResponseModel;
+use KianKamgar\MoadianPhp\Models\InquiryArrayResponseModel;
+use KianKamgar\MoadianPhp\Models\InvoiceHeaderResponseModel;
+use KianKamgar\MoadianPhp\Models\InvoiceResponseModel;
+use KianKamgar\MoadianPhp\Models\RandomChallengeResponseModel;
+use KianKamgar\MoadianPhp\Models\SendInvoiceResultResponseModel;
+use KianKamgar\MoadianPhp\Models\ServerInformationResponseModel;
+use KianKamgar\MoadianPhp\Models\TaxPayerResponseModel;
 use KianKamgar\MoadianPhp\Services\FiscalInformation;
 use KianKamgar\MoadianPhp\Services\InquiryByReferenceId;
 use KianKamgar\MoadianPhp\Services\InquiryByTime;
@@ -28,7 +28,7 @@ class Moadian
 {
     private string $privateKey;
     private string $certificate;
-    private bool $jsonResponse = false;
+    private bool $arrayResponse = false;
 
     /**
      * @throws Exception
@@ -47,57 +47,74 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function getServerInformation(): ServerInformationModel|string
+    public function getServerInformation(): ServerInformationResponseModel|array
     {
-        return (new ServerInformation())->request($this->getToken());
-    }
-
-    /**
-     * @throws GuzzleException
-     */
-    public function getFiscalInformation(): FiscalInformationModel
-    {
-        return (new FiscalInformation($this->memoryId))->request($this->getToken());
-    }
-
-    /**
-     * @throws GuzzleException
-     */
-    public function getTaxPayer(): TaxPayerModel
-    {
-        return (new TaxPayer($this->economicCode))->request($this->getToken());
-    }
-
-    /**
-     * @throws GuzzleException
-     */
-    public function getInquiryByReferenceIds(array $referenceIds, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
-    {
-        return (new InquiryByReferenceId($referenceIds, $start, $end))
+        return (new ServerInformation())
+            ->arrayResponse($this->arrayResponse)
             ->request($this->getToken());
     }
 
     /**
      * @throws GuzzleException
      */
-    public function getInquiryByUid(array $uidList, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
+    public function getFiscalInformation(): FiscalInformationResponseModel|array
     {
-        return (new InquiryByUid($uidList, $this->memoryId, $start, $end))
+        return (new FiscalInformation($this->memoryId))
+            ->arrayResponse($this->arrayResponse)
             ->request($this->getToken());
     }
 
     /**
      * @throws GuzzleException
      */
-    public function getInquiryByTime(int $pageNumber = 1, int $pageSize = 10, ?string $status = null, ?DateTime $start = null, ?DateTime $end = null): InquiryResponseModel
+    public function getTaxPayer(): TaxPayerResponseModel|array
     {
-        return (new InquiryByTime($pageNumber, $pageSize, $status, $start, $end))
+        return (new TaxPayer($this->economicCode))
+            ->arrayResponse($this->arrayResponse)
             ->request($this->getToken());
     }
 
-    public function createInvoice(InvoiceHeaderModel $header, array $body, array $payments = []): array
+    /**
+     * @throws GuzzleException
+     */
+    public function getInquiryByReferenceIds(array $referenceIds, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponseModel|array
     {
-        return (new InvoiceModel())
+        return (new InquiryByReferenceId($referenceIds))
+            ->setStart($start)
+            ->setEnd($end)
+            ->arrayResponse($this->arrayResponse)
+            ->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getInquiryByUid(array $uidList, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponseModel|array
+    {
+        return (new InquiryByUid($uidList, $this->memoryId))
+            ->setStart($start)
+            ->setEnd($end)
+            ->arrayResponse($this->arrayResponse)
+            ->request($this->getToken());
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getInquiryByTime(int $pageNumber = 1, int $pageSize = 10, ?string $status = null, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponseModel|array
+    {
+        return (new InquiryByTime())
+            ->setPageNumber($pageNumber)
+            ->setPageSize($pageSize)
+            ->setStatus($status)
+            ->setEnd($end)
+            ->arrayResponse($this->arrayResponse)
+            ->request($this->getToken());
+    }
+
+    public function createInvoice(InvoiceHeaderResponseModel $header, array $body, array $payments = []): array
+    {
+        return (new InvoiceResponseModel())
             ->setHeader($header->setMemoryId($this->memoryId)->getHeader())
             ->setBody($body)
             ->setPayments($payments)
@@ -107,27 +124,25 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function sendInvoices(array ...$invoices): SendInvoiceResultModel|string
+    public function sendInvoices(array ...$invoices): SendInvoiceResultResponseModel|array
     {
         $serverInformation = $this->getServerInformation();
         $sendInvoice = new SendInvoice(
             $this->privateKey,
             $this->certificate,
             $this->memoryId,
+            $serverInformation->getPublicKeys()[0],
+            $invoices
         );
 
         return $sendInvoice
-            ->jsonResponse($this->jsonResponse)
-            ->request(
-                $invoices,
-                $serverInformation->getPublicKeys()[0],
-                $this->getToken()
-            );
+            ->arrayResponse($this->arrayResponse)
+            ->request($this->getToken());
     }
 
-    public function jsonResponse(bool $jsonResponse): Moadian
+    public function arrayResponse(bool $arrayResponse = true): Moadian
     {
-        $this->jsonResponse = $jsonResponse;
+        $this->arrayResponse = $arrayResponse;
         return $this;
     }
 
@@ -151,8 +166,10 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    private function getRandomChallenge(): RandomChallengeModel
+    private function getRandomChallenge(int $timeToLive = 30): RandomChallengeResponseModel
     {
-        return (new RandomChallenge())->request();
+        return (new RandomChallenge())
+            ->setTimeToLive($timeToLive)
+            ->request();
     }
 }

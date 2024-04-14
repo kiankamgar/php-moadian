@@ -2,34 +2,56 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class InquiryResponseModel implements ModelInterface
+class InquiryResponseModel implements ResponseModelInterface
 {
-    private array $result;
+    private string $referenceNumber;
+    private string $uid;
+    private string $status;
+    private InquiryDataResponseModel $data;
+    private string $packetType;
+    private string $fiscalId;
 
-    public function getResult(): array
+    public function getReferenceNumber(): string
     {
-        return $this->result;
+        return $this->referenceNumber;
     }
 
-    public function setResult(array $data): void
+    public function getUid(): string
     {
-        $result = [];
+        return $this->uid;
+    }
 
-        foreach ($data as $item) {
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
 
-            $inquiry = new InquiryModel();
-            $inquiry->setReferenceNumber($item['referenceNumber']);
-            $inquiry->setUid($item['uid']);
-            $inquiry->setStatus($item['status']);
-            $inquiry->setData($item['data']);
-            $inquiry->setPacketType($item['packetType']);
-            $inquiry->setFiscalId($item['fiscalId']);
+    public function getData(): InquiryDataResponseModel
+    {
+        return $this->data;
+    }
 
-            $result[] = $inquiry;
-        }
+    public function getPacketType(): string
+    {
+        return $this->packetType;
+    }
 
-        $this->result = $result;
+    public function getFiscalId(): string
+    {
+        return $this->fiscalId;
+    }
+
+    public function decodeResponse(array $response): ResponseModelInterface
+    {
+        $this->referenceNumber = $response['referenceNumber'];
+        $this->uid = $response['uid'];
+        $this->status = $response['status'];
+        $this->packetType = $response['packetType'];
+        $this->fiscalId = $response['fiscalId'];
+        $this->data = (new InquiryDataResponseModel())->decodeResponse($response['data']);
+
+        return $this;
     }
 }
