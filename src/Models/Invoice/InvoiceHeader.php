@@ -461,8 +461,10 @@ class InvoiceHeader
     public function getHeader(): array
     {
         $this->init();
+        $objects = get_object_vars($this);
+        unset($objects['memoryId']);
 
-        return get_object_vars($this);
+        return $objects;
     }
 
     private function init()

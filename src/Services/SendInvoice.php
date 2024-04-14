@@ -13,7 +13,6 @@ use KianKamgar\MoadianPhp\Helpers\SignHelper;
 use KianKamgar\MoadianPhp\Models\PublicKey;
 use KianKamgar\MoadianPhp\Models\SendInvoiceResponse;
 use phpseclib3\Crypt\AES;
-use phpseclib3\Crypt\Random;
 use phpseclib3\Crypt\RSA;
 
 class SendInvoice extends Url
@@ -87,21 +86,16 @@ class SendInvoice extends Url
     private function getInvoiceJwe(array $invoice): string
     {
         $invoiceJws = $this->getInvoiceJws($invoice);
-        $encryptionKey = Random::string(32);
-        $initialVector = Random::string(12);
-        $aes = new AES('gcm');
-        $aes->setKey($encryptionKey);
-        $aes->setNonce($initialVector);
-        $ciphertext = $aes->encrypt($invoiceJws);
-        $authTag = $aes->getTag();
-        $publicKey = RSA::load($this->key->getKey());
-        $encryptedKey = $publicKey->encrypt($encryptionKey);
+        $header = $this->getHeader();
+        $symmetricKey = $this->getRandomBytes(32);
+        $iv = $this->getRandomBytes(12);
+        $encryptedKey = $this->getEncryptedKey($symmetricKey);
+        $encryptedContent = $this->getEncryptedContent($symmetricKey, $iv, $header, $invoiceJws);
 
-        return $this->getHeader() . '.' .
-            SignHelper::base64url_encode($encryptedKey) . '.' .
-            SignHelper::base64url_encode($initialVector) . '.' .
-            SignHelper::base64url_encode($ciphertext) . '.' .
-            SignHelper::base64url_encode($authTag);
+        return $header . '.'
+            . $encryptedKey . '.'
+            . SignHelper::base64url_encode($iv) . '.'
+            . $encryptedContent;
     }
 
     /**
@@ -114,7 +108,8 @@ class SendInvoice extends Url
         $data = $header . '.' . $payload;
         $signature = $this->getInvoiceSignature($data);
 
-        return $data . '.' . $signature;
+        return $data . '.'
+            . $signature;
     }
 
     /**
@@ -162,6 +157,30 @@ class SendInvoice extends Url
         ];
 
         return SignHelper::base64url_encode(json_encode($data));
+    }
+
+    private function getEncryptedKey(string $symmetricKey): string
+    {
+        $rsa = RSA::loadPublicKey($this->key->getKey());
+        $rsa->getFingerprint(RSA::ENCRYPTION_OAEP);
+
+        return SignHelper::base64url_encode($rsa->encrypt($symmetricKey));
+    }
+
+    private function getEncryptedContent(string $symmetricKey, string $iv, string $header, string $invoiceJws): string
+    {
+        $aes = (new AES('gcm'));
+        $aes->setKey($symmetricKey);
+        $aes->setNonce($iv);
+        $aes->setAAD($header);
+
+        return SignHelper::base64url_encode($aes->encrypt($invoiceJws)) . '.'
+            . SignHelper::base64url_encode($aes->getTag());
+    }
+
+    private function getRandomBytes(int $length): string
+    {
+        return openssl_random_pseudo_bytes($length);
     }
 
     private function generateUuid(): string
