@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class InquiryResponse implements ResponseModelInterface
+class InquiryResponse implements ResponseModel
 {
     private string $referenceNumber;
     private string $uid;
@@ -43,7 +43,7 @@ class InquiryResponse implements ResponseModelInterface
         return $this->fiscalId;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->referenceNumber = $response['referenceNumber'];
         $this->uid = $response['uid'];

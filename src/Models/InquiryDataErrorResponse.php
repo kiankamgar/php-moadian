@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class InquiryDataErrorResponse implements ResponseModelInterface
+class InquiryDataErrorResponse implements ResponseModel
 {
     private string $code;
     private string $message;
@@ -25,7 +25,7 @@ class InquiryDataErrorResponse implements ResponseModelInterface
         return $this->errorType;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->code = $response['code'];
         $this->message = $response['message'];

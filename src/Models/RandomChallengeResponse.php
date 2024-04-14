@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class RandomChallengeResponse implements ResponseModelInterface
+class RandomChallengeResponse implements ResponseModel
 {
     private string $nonce;
     private string $expDate;
@@ -19,7 +19,7 @@ class RandomChallengeResponse implements ResponseModelInterface
         return $this->expDate;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->nonce = $response['nonce'];
         $this->expDate = $response['expDate'];

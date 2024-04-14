@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Helpers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 use Psr\Http\Message\ResponseInterface;
 
 class RequestHelper
@@ -25,7 +25,7 @@ class RequestHelper
     /**
      * @throws GuzzleException
      */
-    public function get(array|string $requestParams = []): ResponseModelInterface|array
+    public function get(array|string $requestParams = []): ResponseModel|array
     {
         $response = $this->client->request('GET', $this->url, [
             'query'   => $requestParams,
@@ -38,7 +38,7 @@ class RequestHelper
     /**
      * @throws GuzzleException
      */
-    public function post(array $body = []): ResponseModelInterface|array
+    public function post(array $body = []): ResponseModel|array
     {
         $response = $this->client->request('POST', $this->url, [
             'headers' => $this->getAuthorizationHeader(),
@@ -60,7 +60,7 @@ class RequestHelper
         return $this;
     }
 
-    private function getResponse(ResponseInterface $response): ResponseModelInterface|array
+    private function getResponse(ResponseInterface $response): ResponseModel|array
     {
         $arrayResponse = json_decode($response->getBody()->getContents(), true);
 
@@ -79,7 +79,7 @@ class RequestHelper
         return !($response->getStatusCode() < 200 || $response->getStatusCode() >= 300);
     }
 
-    private function getModelResponse(array $responseArray): ResponseModelInterface
+    private function getModelResponse(array $responseArray): ResponseModel
     {
         return (new $this->model())->decodeResponse($responseArray);
     }

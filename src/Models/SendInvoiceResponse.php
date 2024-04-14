@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class SendInvoiceResponse implements ResponseModelInterface
+class SendInvoiceResponse implements ResponseModel
 {
     private int $timestamp;
     private array $result;
@@ -19,7 +19,7 @@ class SendInvoiceResponse implements ResponseModelInterface
         return $this->result;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->timestamp = $response['timestamp'];
         $this->result = [];

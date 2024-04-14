@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class TaxPayerResponse implements ResponseModelInterface
+class TaxPayerResponse implements ResponseModel
 {
     private string $nameTrade;
     private string $taxpayerStatus;
@@ -25,7 +25,7 @@ class TaxPayerResponse implements ResponseModelInterface
         return $this->nationalId;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->nameTrade = $response['nameTrade'];
         $this->taxpayerStatus = $response['taxpayerStatus'];

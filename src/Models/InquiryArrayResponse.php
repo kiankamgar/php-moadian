@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class InquiryArrayResponse implements ResponseModelInterface
+class InquiryArrayResponse implements ResponseModel
 {
     private array $result;
 
@@ -13,7 +13,7 @@ class InquiryArrayResponse implements ResponseModelInterface
         return $this->result;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->result = [];
 

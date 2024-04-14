@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class SendInvoiceResultResponse implements ResponseModelInterface
+class SendInvoiceResultResponse implements ResponseModel
 {
     private string $uid;
     private ?string $packetType;
@@ -31,7 +31,7 @@ class SendInvoiceResultResponse implements ResponseModelInterface
         return $this->data;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->uid = $response['uid'];
         $this->packetType = $response['packetType'];

@@ -2,9 +2,9 @@
 
 namespace KianKamgar\MoadianPhp\Models;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
+use KianKamgar\MoadianPhp\Interfaces\ResponseModel;
 
-class FiscalInformationResponse implements ResponseModelInterface
+class FiscalInformationResponse implements ResponseModel
 {
     private string $nameTrade;
     private string $fiscalStatus;
@@ -31,7 +31,7 @@ class FiscalInformationResponse implements ResponseModelInterface
         return $this->economicCode;
     }
 
-    public function decodeResponse(array $response): ResponseModelInterface
+    public function decodeResponse(array $response): ResponseModel
     {
         $this->nameTrade = $response['nameTrade'];
         $this->fiscalStatus = $response['fiscalStatus'];
