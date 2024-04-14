@@ -59,9 +59,7 @@ class SignNonce
 
     private function getSignature(string $data): string
     {
-        openssl_sign($data, $signature, openssl_pkey_get_private($this->privateKey), OPENSSL_ALGO_SHA256);
-
-        return SignHelper::base64url_encode($signature);
+        return SignHelper::signData($data, $this->privateKey, OPENSSL_ALGO_SHA256);
     }
 
     /**

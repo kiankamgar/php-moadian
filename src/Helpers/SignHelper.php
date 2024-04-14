@@ -34,6 +34,13 @@ class SignHelper
         return self::getFileContents($privateKeyPath);
     }
 
+    public static function signData(string $data, string $privateKey, int|string $algorithm): string
+    {
+        openssl_sign($data, $signature, openssl_pkey_get_private($privateKey), $algorithm);
+
+        return SignHelper::base64url_encode($signature);
+    }
+
     /**
      * @throws Exception
      */

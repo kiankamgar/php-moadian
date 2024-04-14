@@ -114,4 +114,9 @@ class InvoicePaymentModel implements ModelInterface
         $this->pv = $pv;
         return $this;
     }
+
+    public function getPayment(): array
+    {
+        return get_object_vars($this);
+    }
 }

@@ -402,4 +402,9 @@ class InvoiceBodyModel implements ModelInterface
         $this->hs = $hs;
         return $this;
     }
+
+    public function getBody(): array
+    {
+        return get_object_vars($this);
+    }
 }

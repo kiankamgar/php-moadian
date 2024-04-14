@@ -46,6 +46,7 @@ class InvoiceHeaderModel implements ModelInterface
     public ?string $torv;
     public ?float $tocv;
     public string $tinc;
+    private string $memoryId;
 
     public function getIndati2m(): ?string
     {
@@ -470,11 +471,11 @@ class InvoiceHeaderModel implements ModelInterface
         return $this;
     }
 
-    public function __construct(
-        private string $memoryId
-    )
+    public function getHeader(): array
     {
         $this->init();
+
+        return get_object_vars($this);
     }
 
     private function init()

@@ -13,7 +13,7 @@ class RequestHelper
     private string $model;
     private ?string $token = null;
     private Client $client;
-    private ResponseInterface $response;
+    private bool $jsonResponse = false;
 
     public function __construct(string $url, string $model)
     {
@@ -25,19 +25,27 @@ class RequestHelper
     /**
      * @throws GuzzleException
      */
-    public function get(array|string $requestParams = []): ModelInterface
+    public function get(array|string $requestParams = []): ModelInterface|string
     {
-        $this->response = $this->client->request('GET', $this->url, [
+        $response = $this->client->request('GET', $this->url, [
             'query'   => $requestParams,
             'headers' => $this->getAuthorizationHeader()
         ]);
 
-        if (!$this->isOk()) {
+        return $this->getResponse($response);
+    }
 
-            return (new $this->model());
-        }
+    /**
+     * @throws GuzzleException
+     */
+    public function post(array $body = []): ModelInterface|string
+    {
+        $response = $this->client->request('POST', $this->url, [
+            'headers' => $this->getAuthorizationHeader(),
+            'body'    => json_encode($body),
+        ]);
 
-        return $this->getDecodedResponseArray();
+        return $this->getResponse($response);
     }
 
     public function setToken(?string $token): RequestHelper
@@ -46,26 +54,41 @@ class RequestHelper
         return $this;
     }
 
-    public function isOk(): bool
+    public function jsonResponse(bool $jsonResponse): RequestHelper
     {
-        return !($this->response->getStatusCode() < 200 || $this->response->getStatusCode() >= 300);
+        $this->jsonResponse = $jsonResponse;
+        return $this;
     }
 
-    public function getResponse(): ResponseInterface
+    private function getResponse(ResponseInterface $response): ModelInterface|string
     {
-        return $this->response;
+        $content = $response->getBody()->getContents();
+
+        if (!$this->isOk($response)) {
+
+            return $this->jsonResponse ? $content : (new $this->model());
+        }
+
+        return $this->jsonResponse
+            ? $content
+            : $this->getDecodedResponseArray($content);
     }
 
-    public function getDecodedResponseArray(): ModelInterface
+    private function isOk(ResponseInterface $response): bool
     {
-        $responseArray = json_decode($this->getResponse()->getBody()->getContents(), true);
+        return !($response->getStatusCode() < 200 || $response->getStatusCode() >= 300);
+    }
+
+    private function getDecodedResponseArray(string $responseJson): ModelInterface
+    {
+        $responseArray = json_decode($responseJson, true);
         $model = new $this->model();
 
         foreach ($responseArray as $key => $value) {
 
             $method = 'set' . ucfirst($key);
 
-            if (! method_exists($model, $method)) {
+            if (!method_exists($model, $method)) {
 
                 continue;
             }
@@ -88,6 +111,10 @@ class RequestHelper
             return [];
         }
 
-        return ['Authorization' => 'Bearer ' . $this->token];
+        return [
+            'Accept'        => '*/*',
+            'Content-Type'  => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ];
     }
 }
