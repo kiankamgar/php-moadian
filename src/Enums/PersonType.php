@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class PersonTypeEnum
+class PersonType
 {
     public const HAGHIGHI = 1;
     public const HOGHOOGHI = 2;

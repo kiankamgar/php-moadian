@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class InvoiceStatusEnum
+class InvoiceStatus
 {
     public const SUCCESS = 'SUCCESS';
     public const FAILED = 'FAILED';

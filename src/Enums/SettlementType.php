@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class SettlementTypeEnum
+class SettlementType
 {
     public const NAGHDI = 1;
     public const NESIEH = 2;

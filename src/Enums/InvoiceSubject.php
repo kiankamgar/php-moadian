@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class InvoiceSubjectEnum
+class InvoiceSubject
 {
     public const ASLI = 1;
     public const ESLAHI = 2;

@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class FlightTypeEnum
+class FlightType
 {
     public const DAKHELI = 1;
     public const KHAREJI = 2;

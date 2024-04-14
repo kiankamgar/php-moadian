@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class VahedeAndazegiriEnum
+class VahedeAndazegiri
 {
     public const LENGE = "1611";
     public const ADL = "1612";

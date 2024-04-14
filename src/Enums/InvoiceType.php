@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class InvoiceTypeEnum
+class InvoiceType
 {
     public const AVAL = 1;
     public const DOVOM = 2;

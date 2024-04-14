@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class InvoicePatternEnum
+class InvoicePattern
 {
     public const FOROOSH = 1;
     public const FOROOSHE_ARZ = 2;

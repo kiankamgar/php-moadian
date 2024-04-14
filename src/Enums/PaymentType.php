@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Enums;
 
-class PaymentTypeEnum
+class PaymentType
 {
     public const CHEK = 1;
     public const TAHATOR = 2;
