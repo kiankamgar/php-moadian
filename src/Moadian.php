@@ -8,8 +8,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Helpers\SignHelper;
 use KianKamgar\MoadianPhp\Models\FiscalInformationResponse;
 use KianKamgar\MoadianPhp\Models\InquiryArrayResponse;
-use KianKamgar\MoadianPhp\Models\Invoice\Invoice;
-use KianKamgar\MoadianPhp\Models\Invoice\InvoiceHeader;
 use KianKamgar\MoadianPhp\Models\RandomChallengeResponse;
 use KianKamgar\MoadianPhp\Models\SendInvoiceResponse;
 use KianKamgar\MoadianPhp\Models\SendInvoiceResultResponse;
@@ -103,15 +101,6 @@ class Moadian
             ->request($this->getToken());
     }
 
-    public function createInvoice(InvoiceHeader $header, array $body, array $payments = []): array
-    {
-        return (new Invoice())
-            ->setHeader($header->setMemoryId($this->memoryId)->getHeader())
-            ->setBody($body)
-            ->setPayments($payments)
-            ->getInvoice();
-    }
-
     /**
      * @throws GuzzleException
      */
@@ -162,6 +151,11 @@ class Moadian
     {
         $this->arrayResponse = $arrayResponse;
         return $this;
+    }
+
+    public function getMemoryId(): string
+    {
+        return $this->memoryId;
     }
 
     /**

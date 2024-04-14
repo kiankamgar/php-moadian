@@ -2,7 +2,7 @@
 
 namespace KianKamgar\MoadianPhp\Models\Invoice;
 
-class Invoice
+class InvoiceModel
 {
     private array $header;
     private array $body;
@@ -14,7 +14,7 @@ class Invoice
         return $this->header;
     }
 
-    public function setHeader(array $header): Invoice
+    public function setHeader(array $header): InvoiceModel
     {
         $this->header = $header;
         return $this;
@@ -25,7 +25,7 @@ class Invoice
         return $this->body;
     }
 
-    public function setBody(array $body): Invoice
+    public function setBody(array $body): InvoiceModel
     {
         $this->body = $body;
         return $this;
@@ -36,7 +36,7 @@ class Invoice
         return $this->payments;
     }
 
-    public function setPayments(array $payments): Invoice
+    public function setPayments(array $payments): InvoiceModel
     {
         $this->payments = $payments;
         return $this;
@@ -47,7 +47,7 @@ class Invoice
         return $this->extension;
     }
 
-    public function setExtension(array $extension): Invoice
+    public function setExtension(array $extension): InvoiceModel
     {
         $this->extension = $extension;
         return $this;

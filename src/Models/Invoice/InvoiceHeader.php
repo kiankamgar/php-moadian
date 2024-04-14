@@ -7,65 +7,50 @@ use KianKamgar\MoadianPhp\Helpers\VerhoeffAlgorithm;
 
 class InvoiceHeader
 {
-    public ?int $indati2m;
-    public ?int $indatim;
-    public ?int $inty;
-    public ?int $ft;
-    public string $inno;
-    public string $irtaxid;
-    public string $scln;
-    public ?int $setm;
-    public string $tins;
-    public ?int $cap;
-    public string $bid;
-    public ?int $insp;
-    public ?int $tvop;
-    public string $bpc;
-    public ?int $tax17;
-    public string $taxid;
-    public ?int $inp;
-    public string $scc;
-    public ?int $ins;
-    public string $billid;
-    public ?int $tprdis;
-    public ?int $tdis;
-    public ?int $tadis;
-    public ?int $tvam;
-    public ?int $todam;
-    public ?int $tbill;
-    public ?int $tob;
-    public string $tinb;
-    public string $sbc;
-    public string $bbc;
-    public string $bpn;
-    public string $crn;
-    public string $cdcn;
-    public ?int $cdcd;
-    public ?float $tonw;
-    public ?int $torv;
-    public ?float $tocv;
-    public string $tinc;
+    private ?int $indati2m;
+    private ?int $indatim;
+    private ?int $inty;
+    private ?int $ft;
+    private string $inno;
+    private string $irtaxid;
+    private string $scln;
+    private ?int $setm;
+    private string $tins;
+    private ?int $cap;
+    private string $bid;
+    private ?int $insp;
+    private ?int $tvop;
+    private string $bpc;
+    private ?int $tax17;
+    private string $taxid;
+    private ?int $inp;
+    private string $scc;
+    private ?int $ins;
+    private string $billid;
+    private ?int $tprdis;
+    private ?int $tdis;
+    private ?int $tadis;
+    private ?int $tvam;
+    private ?int $todam;
+    private ?int $tbill;
+    private ?int $tob;
+    private string $tinb;
+    private string $sbc;
+    private string $bbc;
+    private string $bpn;
+    private string $crn;
+    private string $cdcn;
+    private ?int $cdcd;
+    private ?float $tonw;
+    private ?int $torv;
+    private ?float $tocv;
+    private string $tinc;
     private string $memoryId;
-
-    public function getIndati2m(): ?int
-    {
-        return $this->indati2m;
-    }
 
     public function setIndati2m(?int $indati2m): InvoiceHeader
     {
         $this->indati2m = $indati2m;
         return $this;
-    }
-
-    public function getIndatim(): ?int
-    {
-        return $this->indatim;
-    }
-
-    public function getInty(): ?int
-    {
-        return $this->inty;
     }
 
     public function setInty(?int $inty): InvoiceHeader
@@ -74,25 +59,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getFt(): ?int
-    {
-        return $this->ft;
-    }
-
     public function setFt(?int $ft): InvoiceHeader
     {
         $this->ft = $ft;
         return $this;
-    }
-
-    public function getInno(): string
-    {
-        return $this->inno;
-    }
-
-    public function getIrtaxid(): string
-    {
-        return $this->irtaxid;
     }
 
     public function setIrtaxid(string $irtaxid): InvoiceHeader
@@ -101,20 +71,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getScln(): string
-    {
-        return $this->scln;
-    }
-
     public function setScln(string $scln): InvoiceHeader
     {
         $this->scln = $scln;
         return $this;
-    }
-
-    public function getSetm(): ?int
-    {
-        return $this->setm;
     }
 
     public function setSetm(?int $setm): InvoiceHeader
@@ -123,20 +83,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTins(): string
-    {
-        return $this->tins;
-    }
-
     public function setTins(string $tins): InvoiceHeader
     {
         $this->tins = $tins;
         return $this;
-    }
-
-    public function getCap(): ?int
-    {
-        return $this->cap;
     }
 
     public function setCap(?int $cap): InvoiceHeader
@@ -145,20 +95,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getBid(): string
-    {
-        return $this->bid;
-    }
-
     public function setBid(string $bid): InvoiceHeader
     {
         $this->bid = $bid;
         return $this;
-    }
-
-    public function getInsp(): ?int
-    {
-        return $this->insp;
     }
 
     public function setInsp(?int $insp): InvoiceHeader
@@ -167,20 +107,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTvop(): ?int
-    {
-        return $this->tvop;
-    }
-
     public function setTvop(?int $tvop): InvoiceHeader
     {
         $this->tvop = $tvop;
         return $this;
-    }
-
-    public function getBpc(): string
-    {
-        return $this->bpc;
     }
 
     public function setBpc(string $bpc): InvoiceHeader
@@ -189,25 +119,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTax17(): ?int
-    {
-        return $this->tax17;
-    }
-
     public function setTax17(?int $tax17): InvoiceHeader
     {
         $this->tax17 = $tax17;
         return $this;
-    }
-
-    public function getTaxid(): string
-    {
-        return $this->taxid;
-    }
-
-    public function getInp(): ?int
-    {
-        return $this->inp;
     }
 
     public function setInp(?int $inp): InvoiceHeader
@@ -216,20 +131,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getScc(): string
-    {
-        return $this->scc;
-    }
-
     public function setScc(string $scc): InvoiceHeader
     {
         $this->scc = $scc;
         return $this;
-    }
-
-    public function getIns(): ?int
-    {
-        return $this->ins;
     }
 
     public function setIns(?int $ins): InvoiceHeader
@@ -238,20 +143,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getBillid(): string
-    {
-        return $this->billid;
-    }
-
     public function setBillid(string $billid): InvoiceHeader
     {
         $this->billid = $billid;
         return $this;
-    }
-
-    public function getTprdis(): ?int
-    {
-        return $this->tprdis;
     }
 
     public function setTprdis(?int $tprdis): InvoiceHeader
@@ -260,20 +155,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTdis(): ?int
-    {
-        return $this->tdis;
-    }
-
     public function setTdis(?int $tdis): InvoiceHeader
     {
         $this->tdis = $tdis;
         return $this;
-    }
-
-    public function getTadis(): ?int
-    {
-        return $this->tadis;
     }
 
     public function setTadis(?int $tadis): InvoiceHeader
@@ -282,20 +167,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTvam(): ?int
-    {
-        return $this->tvam;
-    }
-
     public function setTvam(?int $tvam): InvoiceHeader
     {
         $this->tvam = $tvam;
         return $this;
-    }
-
-    public function getTodam(): ?int
-    {
-        return $this->todam;
     }
 
     public function setTodam(?int $todam): InvoiceHeader
@@ -304,20 +179,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTbill(): ?int
-    {
-        return $this->tbill;
-    }
-
     public function setTbill(?int $tbill): InvoiceHeader
     {
         $this->tbill = $tbill;
         return $this;
-    }
-
-    public function getTob(): ?int
-    {
-        return $this->tob;
     }
 
     public function setTob(?int $tob): InvoiceHeader
@@ -326,20 +191,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTinb(): string
-    {
-        return $this->tinb;
-    }
-
     public function setTinb(string $tinb): InvoiceHeader
     {
         $this->tinb = $tinb;
         return $this;
-    }
-
-    public function getSbc(): string
-    {
-        return $this->sbc;
     }
 
     public function setSbc(string $sbc): InvoiceHeader
@@ -348,20 +203,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getBbc(): string
-    {
-        return $this->bbc;
-    }
-
     public function setBbc(string $bbc): InvoiceHeader
     {
         $this->bbc = $bbc;
         return $this;
-    }
-
-    public function getBpn(): string
-    {
-        return $this->bpn;
     }
 
     public function setBpn(string $bpn): InvoiceHeader
@@ -370,20 +215,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getCrn(): string
-    {
-        return $this->crn;
-    }
-
     public function setCrn(string $crn): InvoiceHeader
     {
         $this->crn = $crn;
         return $this;
-    }
-
-    public function getCdcn(): string
-    {
-        return $this->cdcn;
     }
 
     public function setCdcn(string $cdcn): InvoiceHeader
@@ -392,20 +227,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getCdcd(): ?int
-    {
-        return $this->cdcd;
-    }
-
     public function setCdcd(?int $cdcd): InvoiceHeader
     {
         $this->cdcd = $cdcd;
         return $this;
-    }
-
-    public function getTonw(): ?float
-    {
-        return $this->tonw;
     }
 
     public function setTonw(?float $tonw): InvoiceHeader
@@ -414,20 +239,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTorv(): ?int
-    {
-        return $this->torv;
-    }
-
     public function setTorv(?int $torv): InvoiceHeader
     {
         $this->torv = $torv;
         return $this;
-    }
-
-    public function getTocv(): ?float
-    {
-        return $this->tocv;
     }
 
     public function setTocv(?float $tocv): InvoiceHeader
@@ -436,20 +251,10 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getTinc(): string
-    {
-        return $this->tinc;
-    }
-
     public function setTinc(string $tinc): InvoiceHeader
     {
         $this->tinc = $tinc;
         return $this;
-    }
-
-    public function getMemoryId(): string
-    {
-        return $this->memoryId;
     }
 
     public function setMemoryId(string $memoryId): InvoiceHeader
@@ -458,7 +263,7 @@ class InvoiceHeader
         return $this;
     }
 
-    public function getHeader(): array
+    public function build(): array
     {
         $this->init();
         $objects = get_object_vars($this);
@@ -503,10 +308,5 @@ class InvoiceHeader
         }
 
         return $decimalFormat;
-    }
-
-    private function getFormattedDate(DateTime $dateTime): string
-    {
-        return $dateTime->getTimestamp() * 1000;
     }
 }
