@@ -1,5 +1,5 @@
 {
-    "name": "kiankamgar/moadian-php",
+    "name": "kiankamgar/php-moadian",
     "description": "PHP SDK for working with tp.tax.gov.ir",
     "type": "library",
     "license": "MIT",
