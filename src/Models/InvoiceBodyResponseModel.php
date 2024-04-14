@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class InvoiceBodyResponseModel implements ResponseModelInterface
+class InvoiceBodyResponseModel
 {
     public string $sstid;
     public string $sstt;

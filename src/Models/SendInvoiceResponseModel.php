@@ -19,24 +19,6 @@ class SendInvoiceResponseModel implements ResponseModelInterface
         return $this->result;
     }
 
-    public function setResult(array $data): void
-    {
-        $result = [];
-
-        foreach ($data as $item) {
-
-            $sendInvoiceResult = new SendInvoiceResultResponseModel();
-            $sendInvoiceResult->setUid($item['uid']);
-            $sendInvoiceResult->setPacketType($item['packetType']);
-            $sendInvoiceResult->setReferenceNumber($item['referenceNumber']);
-            $sendInvoiceResult->setData($item['data']);
-
-            $result[] = $sendInvoiceResult;
-        }
-
-        $this->result = $result;
-    }
-
     public function decodeResponse(array $response): ResponseModelInterface
     {
         $this->timestamp = $response['timestamp'];
