@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class InquiryDataResponseModel implements ResponseModelInterface
+class InquiryDataResponse implements ResponseModelInterface
 {
     private array $error;
     private array $warning;
@@ -33,7 +33,7 @@ class InquiryDataResponseModel implements ResponseModelInterface
 
         foreach ($response['error'] as $error) {
 
-            $this->error[] = (new InquiryDataErrorResponseModel())->decodeResponse($error);
+            $this->error[] = (new InquiryDataErrorResponse())->decodeResponse($error);
         }
 
         return $this;

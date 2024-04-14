@@ -4,9 +4,15 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class InquiryArrayResponseModel implements ResponseModelInterface
+class SendInvoiceResponse implements ResponseModelInterface
 {
+    private int $timestamp;
     private array $result;
+
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
+    }
 
     public function getResult(): array
     {
@@ -15,11 +21,12 @@ class InquiryArrayResponseModel implements ResponseModelInterface
 
     public function decodeResponse(array $response): ResponseModelInterface
     {
+        $this->timestamp = $response['timestamp'];
         $this->result = [];
 
-        foreach ($response as $item) {
+        foreach ($response['result'] as $item) {
 
-            $this->result[] = (new InquiryResponseModel())->decodeResponse($item);
+            $this->result[] = (new SendInvoiceResultResponse())->decodeResponse($item);
         }
 
         return $this;

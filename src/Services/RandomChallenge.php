@@ -5,7 +5,7 @@ namespace KianKamgar\MoadianPhp\Services;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Consts\Url;
 use KianKamgar\MoadianPhp\Helpers\RequestHelper;
-use KianKamgar\MoadianPhp\Models\RandomChallengeResponseModel;
+use KianKamgar\MoadianPhp\Models\RandomChallengeResponse;
 
 class RandomChallenge extends Url
 {
@@ -16,14 +16,14 @@ class RandomChallenge extends Url
     {
         $this->requestHelper = new RequestHelper(
             self::RANDOM_CHALLENGE_URL,
-            RandomChallengeResponseModel::class
+            RandomChallengeResponse::class
         );
     }
 
     /**
      * @throws GuzzleException
      */
-    public function request(): RandomChallengeResponseModel|array
+    public function request(): RandomChallengeResponse|array
     {
         return $this->requestHelper->get(['timeToLive' => $this->timeToLive]);
     }

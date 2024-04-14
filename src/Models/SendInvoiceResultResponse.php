@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class SendInvoiceResultResponseModel implements ResponseModelInterface
+class SendInvoiceResultResponse implements ResponseModelInterface
 {
     private string $uid;
     private ?string $packetType;

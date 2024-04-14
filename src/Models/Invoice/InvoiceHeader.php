@@ -1,14 +1,14 @@
 <?php
 
-namespace KianKamgar\MoadianPhp\Models;
+namespace KianKamgar\MoadianPhp\Models\Invoice;
 
 use DateTime;
 use KianKamgar\MoadianPhp\Helpers\VerhoeffAlgorithm;
 
-class InvoiceHeaderResponseModel
+class InvoiceHeader
 {
-    public ?string $indati2m;
-    public ?string $indatim;
+    public ?int $indati2m;
+    public ?int $indatim;
     public ?int $inty;
     public ?int $ft;
     public string $inno;
@@ -16,23 +16,23 @@ class InvoiceHeaderResponseModel
     public string $scln;
     public ?int $setm;
     public string $tins;
-    public ?string $cap;
+    public ?int $cap;
     public string $bid;
-    public ?string $insp;
-    public ?string $tvop;
+    public ?int $insp;
+    public ?int $tvop;
     public string $bpc;
-    public ?string $tax17;
+    public ?int $tax17;
     public string $taxid;
     public ?int $inp;
     public string $scc;
     public ?int $ins;
     public string $billid;
-    public ?string $tprdis;
-    public ?string $tdis;
-    public ?string $tadis;
-    public ?string $tvam;
-    public ?string $todam;
-    public ?string $tbill;
+    public ?int $tprdis;
+    public ?int $tdis;
+    public ?int $tadis;
+    public ?int $tvam;
+    public ?int $todam;
+    public ?int $tbill;
     public ?int $tob;
     public string $tinb;
     public string $sbc;
@@ -42,23 +42,23 @@ class InvoiceHeaderResponseModel
     public string $cdcn;
     public ?int $cdcd;
     public ?float $tonw;
-    public ?string $torv;
+    public ?int $torv;
     public ?float $tocv;
     public string $tinc;
     private string $memoryId;
 
-    public function getIndati2m(): ?string
+    public function getIndati2m(): ?int
     {
         return $this->indati2m;
     }
 
-    public function setIndati2m(DateTime $indati2m): InvoiceHeaderResponseModel
+    public function setIndati2m(?int $indati2m): InvoiceHeader
     {
-        $this->indati2m = $this->getFormattedDate($indati2m);
+        $this->indati2m = $indati2m;
         return $this;
     }
 
-    public function getIndatim(): ?string
+    public function getIndatim(): ?int
     {
         return $this->indatim;
     }
@@ -68,9 +68,9 @@ class InvoiceHeaderResponseModel
         return $this->inty;
     }
 
-    public function setInty(?int $invoiceType): InvoiceHeaderResponseModel
+    public function setInty(?int $inty): InvoiceHeader
     {
-        $this->inty = $invoiceType;
+        $this->inty = $inty;
         return $this;
     }
 
@@ -79,7 +79,7 @@ class InvoiceHeaderResponseModel
         return $this->ft;
     }
 
-    public function setFt(?int $ft): InvoiceHeaderResponseModel
+    public function setFt(?int $ft): InvoiceHeader
     {
         $this->ft = $ft;
         return $this;
@@ -90,18 +90,12 @@ class InvoiceHeaderResponseModel
         return $this->inno;
     }
 
-    public function setInno(string $inno): InvoiceHeaderResponseModel
-    {
-        $this->inno = $inno;
-        return $this;
-    }
-
     public function getIrtaxid(): string
     {
         return $this->irtaxid;
     }
 
-    public function setIrtaxid(string $irtaxid): InvoiceHeaderResponseModel
+    public function setIrtaxid(string $irtaxid): InvoiceHeader
     {
         $this->irtaxid = $irtaxid;
         return $this;
@@ -112,7 +106,7 @@ class InvoiceHeaderResponseModel
         return $this->scln;
     }
 
-    public function setScln(string $scln): InvoiceHeaderResponseModel
+    public function setScln(string $scln): InvoiceHeader
     {
         $this->scln = $scln;
         return $this;
@@ -123,7 +117,7 @@ class InvoiceHeaderResponseModel
         return $this->setm;
     }
 
-    public function setSetm(?int $setm): InvoiceHeaderResponseModel
+    public function setSetm(?int $setm): InvoiceHeader
     {
         $this->setm = $setm;
         return $this;
@@ -134,18 +128,18 @@ class InvoiceHeaderResponseModel
         return $this->tins;
     }
 
-    public function setTins(string $tins): InvoiceHeaderResponseModel
+    public function setTins(string $tins): InvoiceHeader
     {
         $this->tins = $tins;
         return $this;
     }
 
-    public function getCap(): ?string
+    public function getCap(): ?int
     {
         return $this->cap;
     }
 
-    public function setCap(?string $cap): InvoiceHeaderResponseModel
+    public function setCap(?int $cap): InvoiceHeader
     {
         $this->cap = $cap;
         return $this;
@@ -156,29 +150,29 @@ class InvoiceHeaderResponseModel
         return $this->bid;
     }
 
-    public function setBid(string $bid): InvoiceHeaderResponseModel
+    public function setBid(string $bid): InvoiceHeader
     {
         $this->bid = $bid;
         return $this;
     }
 
-    public function getInsp(): ?string
+    public function getInsp(): ?int
     {
         return $this->insp;
     }
 
-    public function setInsp(?string $insp): InvoiceHeaderResponseModel
+    public function setInsp(?int $insp): InvoiceHeader
     {
         $this->insp = $insp;
         return $this;
     }
 
-    public function getTvop(): ?string
+    public function getTvop(): ?int
     {
         return $this->tvop;
     }
 
-    public function setTvop(?string $tvop): InvoiceHeaderResponseModel
+    public function setTvop(?int $tvop): InvoiceHeader
     {
         $this->tvop = $tvop;
         return $this;
@@ -189,18 +183,18 @@ class InvoiceHeaderResponseModel
         return $this->bpc;
     }
 
-    public function setBpc(string $bpc): InvoiceHeaderResponseModel
+    public function setBpc(string $bpc): InvoiceHeader
     {
         $this->bpc = $bpc;
         return $this;
     }
 
-    public function getTax17(): ?string
+    public function getTax17(): ?int
     {
         return $this->tax17;
     }
 
-    public function setTax17(?string $tax17): InvoiceHeaderResponseModel
+    public function setTax17(?int $tax17): InvoiceHeader
     {
         $this->tax17 = $tax17;
         return $this;
@@ -211,18 +205,12 @@ class InvoiceHeaderResponseModel
         return $this->taxid;
     }
 
-    public function setTaxid(string $taxid): InvoiceHeaderResponseModel
-    {
-        $this->taxid = $taxid;
-        return $this;
-    }
-
     public function getInp(): ?int
     {
         return $this->inp;
     }
 
-    public function setInp(?int $inp): InvoiceHeaderResponseModel
+    public function setInp(?int $inp): InvoiceHeader
     {
         $this->inp = $inp;
         return $this;
@@ -233,7 +221,7 @@ class InvoiceHeaderResponseModel
         return $this->scc;
     }
 
-    public function setScc(string $scc): InvoiceHeaderResponseModel
+    public function setScc(string $scc): InvoiceHeader
     {
         $this->scc = $scc;
         return $this;
@@ -244,7 +232,7 @@ class InvoiceHeaderResponseModel
         return $this->ins;
     }
 
-    public function setIns(?int $ins): InvoiceHeaderResponseModel
+    public function setIns(?int $ins): InvoiceHeader
     {
         $this->ins = $ins;
         return $this;
@@ -255,73 +243,73 @@ class InvoiceHeaderResponseModel
         return $this->billid;
     }
 
-    public function setBillid(string $billid): InvoiceHeaderResponseModel
+    public function setBillid(string $billid): InvoiceHeader
     {
         $this->billid = $billid;
         return $this;
     }
 
-    public function getTprdis(): ?string
+    public function getTprdis(): ?int
     {
         return $this->tprdis;
     }
 
-    public function setTprdis(?string $tprdis): InvoiceHeaderResponseModel
+    public function setTprdis(?int $tprdis): InvoiceHeader
     {
         $this->tprdis = $tprdis;
         return $this;
     }
 
-    public function getTdis(): ?string
+    public function getTdis(): ?int
     {
         return $this->tdis;
     }
 
-    public function setTdis(?string $tdis): InvoiceHeaderResponseModel
+    public function setTdis(?int $tdis): InvoiceHeader
     {
         $this->tdis = $tdis;
         return $this;
     }
 
-    public function getTadis(): ?string
+    public function getTadis(): ?int
     {
         return $this->tadis;
     }
 
-    public function setTadis(?string $tadis): InvoiceHeaderResponseModel
+    public function setTadis(?int $tadis): InvoiceHeader
     {
         $this->tadis = $tadis;
         return $this;
     }
 
-    public function getTvam(): ?string
+    public function getTvam(): ?int
     {
         return $this->tvam;
     }
 
-    public function setTvam(?string $tvam): InvoiceHeaderResponseModel
+    public function setTvam(?int $tvam): InvoiceHeader
     {
         $this->tvam = $tvam;
         return $this;
     }
 
-    public function getTodam(): ?string
+    public function getTodam(): ?int
     {
         return $this->todam;
     }
 
-    public function setTodam(?string $todam): InvoiceHeaderResponseModel
+    public function setTodam(?int $todam): InvoiceHeader
     {
         $this->todam = $todam;
         return $this;
     }
 
-    public function getTbill(): ?string
+    public function getTbill(): ?int
     {
         return $this->tbill;
     }
 
-    public function setTbill(?string $tbill): InvoiceHeaderResponseModel
+    public function setTbill(?int $tbill): InvoiceHeader
     {
         $this->tbill = $tbill;
         return $this;
@@ -332,7 +320,7 @@ class InvoiceHeaderResponseModel
         return $this->tob;
     }
 
-    public function setTob(?int $tob): InvoiceHeaderResponseModel
+    public function setTob(?int $tob): InvoiceHeader
     {
         $this->tob = $tob;
         return $this;
@@ -343,7 +331,7 @@ class InvoiceHeaderResponseModel
         return $this->tinb;
     }
 
-    public function setTinb(string $tinb): InvoiceHeaderResponseModel
+    public function setTinb(string $tinb): InvoiceHeader
     {
         $this->tinb = $tinb;
         return $this;
@@ -354,7 +342,7 @@ class InvoiceHeaderResponseModel
         return $this->sbc;
     }
 
-    public function setSbc(string $sbc): InvoiceHeaderResponseModel
+    public function setSbc(string $sbc): InvoiceHeader
     {
         $this->sbc = $sbc;
         return $this;
@@ -365,7 +353,7 @@ class InvoiceHeaderResponseModel
         return $this->bbc;
     }
 
-    public function setBbc(string $bbc): InvoiceHeaderResponseModel
+    public function setBbc(string $bbc): InvoiceHeader
     {
         $this->bbc = $bbc;
         return $this;
@@ -376,7 +364,7 @@ class InvoiceHeaderResponseModel
         return $this->bpn;
     }
 
-    public function setBpn(string $bpn): InvoiceHeaderResponseModel
+    public function setBpn(string $bpn): InvoiceHeader
     {
         $this->bpn = $bpn;
         return $this;
@@ -387,7 +375,7 @@ class InvoiceHeaderResponseModel
         return $this->crn;
     }
 
-    public function setCrn(string $crn): InvoiceHeaderResponseModel
+    public function setCrn(string $crn): InvoiceHeader
     {
         $this->crn = $crn;
         return $this;
@@ -398,7 +386,7 @@ class InvoiceHeaderResponseModel
         return $this->cdcn;
     }
 
-    public function setCdcn(string $cdcn): InvoiceHeaderResponseModel
+    public function setCdcn(string $cdcn): InvoiceHeader
     {
         $this->cdcn = $cdcn;
         return $this;
@@ -409,7 +397,7 @@ class InvoiceHeaderResponseModel
         return $this->cdcd;
     }
 
-    public function setCdcd(?int $cdcd): InvoiceHeaderResponseModel
+    public function setCdcd(?int $cdcd): InvoiceHeader
     {
         $this->cdcd = $cdcd;
         return $this;
@@ -420,18 +408,18 @@ class InvoiceHeaderResponseModel
         return $this->tonw;
     }
 
-    public function setTonw(?float $tonw): InvoiceHeaderResponseModel
+    public function setTonw(?float $tonw): InvoiceHeader
     {
         $this->tonw = $tonw;
         return $this;
     }
 
-    public function getTorv(): ?string
+    public function getTorv(): ?int
     {
         return $this->torv;
     }
 
-    public function setTorv(?string $torv): InvoiceHeaderResponseModel
+    public function setTorv(?int $torv): InvoiceHeader
     {
         $this->torv = $torv;
         return $this;
@@ -442,7 +430,7 @@ class InvoiceHeaderResponseModel
         return $this->tocv;
     }
 
-    public function setTocv(?float $tocv): InvoiceHeaderResponseModel
+    public function setTocv(?float $tocv): InvoiceHeader
     {
         $this->tocv = $tocv;
         return $this;
@@ -453,7 +441,7 @@ class InvoiceHeaderResponseModel
         return $this->tinc;
     }
 
-    public function setTinc(string $tinc): InvoiceHeaderResponseModel
+    public function setTinc(string $tinc): InvoiceHeader
     {
         $this->tinc = $tinc;
         return $this;
@@ -464,7 +452,7 @@ class InvoiceHeaderResponseModel
         return $this->memoryId;
     }
 
-    public function setMemoryId(string $memoryId): InvoiceHeaderResponseModel
+    public function setMemoryId(string $memoryId): InvoiceHeader
     {
         $this->memoryId = $memoryId;
         return $this;

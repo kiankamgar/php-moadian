@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class PublicKeyModel implements ResponseModelInterface
+class PublicKey implements ResponseModelInterface
 {
     private string $key;
     private string $id;

@@ -1,8 +1,8 @@
 <?php
 
-namespace KianKamgar\MoadianPhp\Models;
+namespace KianKamgar\MoadianPhp\Models\Invoice;
 
-class InvoiceResponseModel
+class Invoice
 {
     private array $header;
     private array $body;
@@ -14,7 +14,7 @@ class InvoiceResponseModel
         return $this->header;
     }
 
-    public function setHeader(array $header): InvoiceResponseModel
+    public function setHeader(array $header): Invoice
     {
         $this->header = $header;
         return $this;
@@ -25,7 +25,7 @@ class InvoiceResponseModel
         return $this->body;
     }
 
-    public function setBody(array $body): InvoiceResponseModel
+    public function setBody(array $body): Invoice
     {
         $this->body = $body;
         return $this;
@@ -36,7 +36,7 @@ class InvoiceResponseModel
         return $this->payments;
     }
 
-    public function setPayments(array $payments): InvoiceResponseModel
+    public function setPayments(array $payments): Invoice
     {
         $this->payments = $payments;
         return $this;
@@ -47,7 +47,7 @@ class InvoiceResponseModel
         return $this->extension;
     }
 
-    public function setExtension(array $extension): InvoiceResponseModel
+    public function setExtension(array $extension): Invoice
     {
         $this->extension = $extension;
         return $this;

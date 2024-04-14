@@ -4,12 +4,12 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class ServerInformationResponseModel implements ResponseModelInterface
+class ServerInformationResponse implements ResponseModelInterface
 {
-    private string $serverTime;
+    private int $serverTime;
     private array $publicKeys;
 
-    public function getServerTime(): string
+    public function getServerTime(): int
     {
         return $this->serverTime;
     }
@@ -26,7 +26,7 @@ class ServerInformationResponseModel implements ResponseModelInterface
 
         foreach ($response['publicKeys'] as $publicKey) {
 
-            $this->publicKeys[] = (new PublicKeyModel())->decodeResponse($publicKey);
+            $this->publicKeys[] = (new PublicKey())->decodeResponse($publicKey);
         }
 
         return $this;

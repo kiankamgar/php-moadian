@@ -9,7 +9,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use KianKamgar\MoadianPhp\Consts\Url;
 use KianKamgar\MoadianPhp\Helpers\InquiryHelper;
 use KianKamgar\MoadianPhp\Helpers\RequestHelper;
-use KianKamgar\MoadianPhp\Models\InquiryArrayResponseModel;
+use KianKamgar\MoadianPhp\Models\InquiryArrayResponse;
 
 class InquiryByUid extends Url
 {
@@ -24,14 +24,14 @@ class InquiryByUid extends Url
     {
         $this->requestHelper = new RequestHelper(
             self::INQUIRY_BY_UID_URL,
-            InquiryArrayResponseModel::class
+            InquiryArrayResponse::class
         );
     }
 
     /**
      * @throws GuzzleException
      */
-    public function request(string $token): InquiryArrayResponseModel|array
+    public function request(string $token): InquiryArrayResponse|array
     {
         return $this->requestHelper
             ->setToken($token)

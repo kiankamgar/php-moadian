@@ -1,10 +1,8 @@
 <?php
 
-namespace KianKamgar\MoadianPhp\Models;
+namespace KianKamgar\MoadianPhp\Models\Invoice;
 
-use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
-
-class InvoiceBodyResponseModel
+class InvoiceBody
 {
     public string $sstid;
     public string $sstt;
@@ -13,28 +11,28 @@ class InvoiceBodyResponseModel
     public ?float $fee;
     public ?float $cfee;
     public string $cut;
-    public ?string $exr;
-    public ?string $prdis;
-    public ?string $dis;
-    public ?string $adis;
+    public ?int $exr;
+    public ?int $prdis;
+    public ?int $dis;
+    public ?int $adis;
     public ?float $vra;
-    public ?string $vam;
+    public ?int $vam;
     public string $odt;
     public ?float $odr;
-    public ?string $odam;
+    public ?int $odam;
     public string $olt;
     public ?float $olr;
-    public ?string $olam;
-    public ?string $consfee;
-    public ?string $spro;
-    public ?string $bros;
-    public ?string $tcpbs;
-    public ?string $cop;
+    public ?int $olam;
+    public ?int $consfee;
+    public ?int $spro;
+    public ?int $bros;
+    public ?int $tcpbs;
+    public ?int $cop;
     public string $bsrn;
-    public ?string $vop;
-    public ?string $tsstam;
+    public ?int $vop;
+    public ?int $tsstam;
     public ?float $nw;
-    public ?string $ssrv;
+    public ?int $ssrv;
     public ?float $sscv;
     public ?float $pspd;
     public ?float $cui;
@@ -45,7 +43,7 @@ class InvoiceBodyResponseModel
         return $this->sstid;
     }
 
-    public function setSstid(string $sstid): InvoiceBodyResponseModel
+    public function setSstid(string $sstid): InvoiceBody
     {
         $this->sstid = $sstid;
         return $this;
@@ -56,7 +54,7 @@ class InvoiceBodyResponseModel
         return $this->sstt;
     }
 
-    public function setSstt(string $sstt): InvoiceBodyResponseModel
+    public function setSstt(string $sstt): InvoiceBody
     {
         $this->sstt = $sstt;
         return $this;
@@ -67,7 +65,7 @@ class InvoiceBodyResponseModel
         return $this->mu;
     }
 
-    public function setMu(string $mu): InvoiceBodyResponseModel
+    public function setMu(string $mu): InvoiceBody
     {
         $this->mu = $mu;
         return $this;
@@ -78,7 +76,7 @@ class InvoiceBodyResponseModel
         return $this->am;
     }
 
-    public function setAm(?float $am): InvoiceBodyResponseModel
+    public function setAm(?float $am): InvoiceBody
     {
         $this->am = $am;
         return $this;
@@ -89,7 +87,7 @@ class InvoiceBodyResponseModel
         return $this->fee;
     }
 
-    public function setFee(?float $fee): InvoiceBodyResponseModel
+    public function setFee(?float $fee): InvoiceBody
     {
         $this->fee = $fee;
         return $this;
@@ -100,7 +98,7 @@ class InvoiceBodyResponseModel
         return $this->cfee;
     }
 
-    public function setCfee(?float $cfee): InvoiceBodyResponseModel
+    public function setCfee(?float $cfee): InvoiceBody
     {
         $this->cfee = $cfee;
         return $this;
@@ -111,51 +109,51 @@ class InvoiceBodyResponseModel
         return $this->cut;
     }
 
-    public function setCut(string $cut): InvoiceBodyResponseModel
+    public function setCut(string $cut): InvoiceBody
     {
         $this->cut = $cut;
         return $this;
     }
 
-    public function getExr(): ?string
+    public function getExr(): ?int
     {
         return $this->exr;
     }
 
-    public function setExr(?string $exr): InvoiceBodyResponseModel
+    public function setExr(?int $exr): InvoiceBody
     {
         $this->exr = $exr;
         return $this;
     }
 
-    public function getPrdis(): ?string
+    public function getPrdis(): ?int
     {
         return $this->prdis;
     }
 
-    public function setPrdis(?string $prdis): InvoiceBodyResponseModel
+    public function setPrdis(?int $prdis): InvoiceBody
     {
         $this->prdis = $prdis;
         return $this;
     }
 
-    public function getDis(): ?string
+    public function getDis(): ?int
     {
         return $this->dis;
     }
 
-    public function setDis(?string $dis): InvoiceBodyResponseModel
+    public function setDis(?int $dis): InvoiceBody
     {
         $this->dis = $dis;
         return $this;
     }
 
-    public function getAdis(): ?string
+    public function getAdis(): ?int
     {
         return $this->adis;
     }
 
-    public function setAdis(?string $adis): InvoiceBodyResponseModel
+    public function setAdis(?int $adis): InvoiceBody
     {
         $this->adis = $adis;
         return $this;
@@ -166,18 +164,18 @@ class InvoiceBodyResponseModel
         return $this->vra;
     }
 
-    public function setVra(?float $vra): InvoiceBodyResponseModel
+    public function setVra(?float $vra): InvoiceBody
     {
         $this->vra = $vra;
         return $this;
     }
 
-    public function getVam(): ?string
+    public function getVam(): ?int
     {
         return $this->vam;
     }
 
-    public function setVam(?string $vam): InvoiceBodyResponseModel
+    public function setVam(?int $vam): InvoiceBody
     {
         $this->vam = $vam;
         return $this;
@@ -188,7 +186,7 @@ class InvoiceBodyResponseModel
         return $this->odt;
     }
 
-    public function setOdt(string $odt): InvoiceBodyResponseModel
+    public function setOdt(string $odt): InvoiceBody
     {
         $this->odt = $odt;
         return $this;
@@ -199,18 +197,18 @@ class InvoiceBodyResponseModel
         return $this->odr;
     }
 
-    public function setOdr(?float $odr): InvoiceBodyResponseModel
+    public function setOdr(?float $odr): InvoiceBody
     {
         $this->odr = $odr;
         return $this;
     }
 
-    public function getOdam(): ?string
+    public function getOdam(): ?int
     {
         return $this->odam;
     }
 
-    public function setOdam(?string $odam): InvoiceBodyResponseModel
+    public function setOdam(?int $odam): InvoiceBody
     {
         $this->odam = $odam;
         return $this;
@@ -221,7 +219,7 @@ class InvoiceBodyResponseModel
         return $this->olt;
     }
 
-    public function setOlt(string $olt): InvoiceBodyResponseModel
+    public function setOlt(string $olt): InvoiceBody
     {
         $this->olt = $olt;
         return $this;
@@ -232,73 +230,73 @@ class InvoiceBodyResponseModel
         return $this->olr;
     }
 
-    public function setOlr(?float $olr): InvoiceBodyResponseModel
+    public function setOlr(?float $olr): InvoiceBody
     {
         $this->olr = $olr;
         return $this;
     }
 
-    public function getOlam(): ?string
+    public function getOlam(): ?int
     {
         return $this->olam;
     }
 
-    public function setOlam(?string $olam): InvoiceBodyResponseModel
+    public function setOlam(?int $olam): InvoiceBody
     {
         $this->olam = $olam;
         return $this;
     }
 
-    public function getConsfee(): ?string
+    public function getConsfee(): ?int
     {
         return $this->consfee;
     }
 
-    public function setConsfee(?string $consfee): InvoiceBodyResponseModel
+    public function setConsfee(?int $consfee): InvoiceBody
     {
         $this->consfee = $consfee;
         return $this;
     }
 
-    public function getSpro(): ?string
+    public function getSpro(): ?int
     {
         return $this->spro;
     }
 
-    public function setSpro(?string $spro): InvoiceBodyResponseModel
+    public function setSpro(?int $spro): InvoiceBody
     {
         $this->spro = $spro;
         return $this;
     }
 
-    public function getBros(): ?string
+    public function getBros(): ?int
     {
         return $this->bros;
     }
 
-    public function setBros(?string $bros): InvoiceBodyResponseModel
+    public function setBros(?int $bros): InvoiceBody
     {
         $this->bros = $bros;
         return $this;
     }
 
-    public function getTcpbs(): ?string
+    public function getTcpbs(): ?int
     {
         return $this->tcpbs;
     }
 
-    public function setTcpbs(?string $tcpbs): InvoiceBodyResponseModel
+    public function setTcpbs(?int $tcpbs): InvoiceBody
     {
         $this->tcpbs = $tcpbs;
         return $this;
     }
 
-    public function getCop(): ?string
+    public function getCop(): ?int
     {
         return $this->cop;
     }
 
-    public function setCop(?string $cop): InvoiceBodyResponseModel
+    public function setCop(?int $cop): InvoiceBody
     {
         $this->cop = $cop;
         return $this;
@@ -309,29 +307,29 @@ class InvoiceBodyResponseModel
         return $this->bsrn;
     }
 
-    public function setBsrn(string $bsrn): InvoiceBodyResponseModel
+    public function setBsrn(string $bsrn): InvoiceBody
     {
         $this->bsrn = $bsrn;
         return $this;
     }
 
-    public function getVop(): ?string
+    public function getVop(): ?int
     {
         return $this->vop;
     }
 
-    public function setVop(?string $vop): InvoiceBodyResponseModel
+    public function setVop(?int $vop): InvoiceBody
     {
         $this->vop = $vop;
         return $this;
     }
 
-    public function getTsstam(): ?string
+    public function getTsstam(): ?int
     {
         return $this->tsstam;
     }
 
-    public function setTsstam(?string $tsstam): InvoiceBodyResponseModel
+    public function setTsstam(?int $tsstam): InvoiceBody
     {
         $this->tsstam = $tsstam;
         return $this;
@@ -342,18 +340,18 @@ class InvoiceBodyResponseModel
         return $this->nw;
     }
 
-    public function setNw(?float $nw): InvoiceBodyResponseModel
+    public function setNw(?float $nw): InvoiceBody
     {
         $this->nw = $nw;
         return $this;
     }
 
-    public function getSsrv(): ?string
+    public function getSsrv(): ?int
     {
         return $this->ssrv;
     }
 
-    public function setSsrv(?string $ssrv): InvoiceBodyResponseModel
+    public function setSsrv(?int $ssrv): InvoiceBody
     {
         $this->ssrv = $ssrv;
         return $this;
@@ -364,7 +362,7 @@ class InvoiceBodyResponseModel
         return $this->sscv;
     }
 
-    public function setSscv(?float $sscv): InvoiceBodyResponseModel
+    public function setSscv(?float $sscv): InvoiceBody
     {
         $this->sscv = $sscv;
         return $this;
@@ -375,7 +373,7 @@ class InvoiceBodyResponseModel
         return $this->pspd;
     }
 
-    public function setPspd(?float $pspd): InvoiceBodyResponseModel
+    public function setPspd(?float $pspd): InvoiceBody
     {
         $this->pspd = $pspd;
         return $this;
@@ -386,7 +384,7 @@ class InvoiceBodyResponseModel
         return $this->cui;
     }
 
-    public function setCui(?float $cui): InvoiceBodyResponseModel
+    public function setCui(?float $cui): InvoiceBody
     {
         $this->cui = $cui;
         return $this;
@@ -397,7 +395,7 @@ class InvoiceBodyResponseModel
         return $this->hs;
     }
 
-    public function setHs(string $hs): InvoiceBodyResponseModel
+    public function setHs(string $hs): InvoiceBody
     {
         $this->hs = $hs;
         return $this;

@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class InquiryDataErrorResponseModel implements ResponseModelInterface
+class InquiryDataErrorResponse implements ResponseModelInterface
 {
     private string $code;
     private string $message;

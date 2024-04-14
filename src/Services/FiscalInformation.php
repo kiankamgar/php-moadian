@@ -5,7 +5,7 @@ namespace KianKamgar\MoadianPhp\Services;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Consts\Url;
 use KianKamgar\MoadianPhp\Helpers\RequestHelper;
-use KianKamgar\MoadianPhp\Models\FiscalInformationResponseModel;
+use KianKamgar\MoadianPhp\Models\FiscalInformationResponse;
 
 class FiscalInformation extends Url
 {
@@ -17,14 +17,14 @@ class FiscalInformation extends Url
     {
         $this->requestHelper = new RequestHelper(
             self::FISCAL_INFORMATION_URL,
-            FiscalInformationResponseModel::class
+            FiscalInformationResponse::class
         );
     }
 
     /**
      * @throws GuzzleException
      */
-    public function request(string $token): FiscalInformationResponseModel|array
+    public function request(string $token): FiscalInformationResponse|array
     {
         return $this->requestHelper
             ->setToken($token)

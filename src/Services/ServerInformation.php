@@ -5,7 +5,7 @@ namespace KianKamgar\MoadianPhp\Services;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Consts\Url;
 use KianKamgar\MoadianPhp\Helpers\RequestHelper;
-use KianKamgar\MoadianPhp\Models\ServerInformationResponseModel;
+use KianKamgar\MoadianPhp\Models\ServerInformationResponse;
 
 class ServerInformation extends Url
 {
@@ -15,14 +15,14 @@ class ServerInformation extends Url
     {
         $this->requestHelper = new RequestHelper(
             self::SERVER_INFORMATION_URL,
-            ServerInformationResponseModel::class
+            ServerInformationResponse::class
         );
     }
 
     /**
      * @throws GuzzleException
      */
-    public function request(string $token): ServerInformationResponseModel|array
+    public function request(string $token): ServerInformationResponse|array
     {
         return $this->requestHelper
             ->setToken($token)

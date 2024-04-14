@@ -4,12 +4,12 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class InquiryResponseModel implements ResponseModelInterface
+class InquiryResponse implements ResponseModelInterface
 {
     private string $referenceNumber;
     private string $uid;
     private string $status;
-    private InquiryDataResponseModel $data;
+    private InquiryDataResponse $data;
     private string $packetType;
     private string $fiscalId;
 
@@ -28,7 +28,7 @@ class InquiryResponseModel implements ResponseModelInterface
         return $this->status;
     }
 
-    public function getData(): InquiryDataResponseModel
+    public function getData(): InquiryDataResponse
     {
         return $this->data;
     }
@@ -50,7 +50,7 @@ class InquiryResponseModel implements ResponseModelInterface
         $this->status = $response['status'];
         $this->packetType = $response['packetType'];
         $this->fiscalId = $response['fiscalId'];
-        $this->data = (new InquiryDataResponseModel())->decodeResponse($response['data']);
+        $this->data = (new InquiryDataResponse())->decodeResponse($response['data']);
 
         return $this;
     }

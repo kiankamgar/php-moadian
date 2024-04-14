@@ -6,15 +6,15 @@ use DateTime;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use KianKamgar\MoadianPhp\Helpers\SignHelper;
-use KianKamgar\MoadianPhp\Models\FiscalInformationResponseModel;
-use KianKamgar\MoadianPhp\Models\InquiryArrayResponseModel;
-use KianKamgar\MoadianPhp\Models\InvoiceHeaderResponseModel;
-use KianKamgar\MoadianPhp\Models\InvoiceResponseModel;
-use KianKamgar\MoadianPhp\Models\RandomChallengeResponseModel;
-use KianKamgar\MoadianPhp\Models\SendInvoiceResponseModel;
-use KianKamgar\MoadianPhp\Models\SendInvoiceResultResponseModel;
-use KianKamgar\MoadianPhp\Models\ServerInformationResponseModel;
-use KianKamgar\MoadianPhp\Models\TaxPayerResponseModel;
+use KianKamgar\MoadianPhp\Models\FiscalInformationResponse;
+use KianKamgar\MoadianPhp\Models\InquiryArrayResponse;
+use KianKamgar\MoadianPhp\Models\Invoice\Invoice;
+use KianKamgar\MoadianPhp\Models\Invoice\InvoiceHeader;
+use KianKamgar\MoadianPhp\Models\RandomChallengeResponse;
+use KianKamgar\MoadianPhp\Models\SendInvoiceResponse;
+use KianKamgar\MoadianPhp\Models\SendInvoiceResultResponse;
+use KianKamgar\MoadianPhp\Models\ServerInformationResponse;
+use KianKamgar\MoadianPhp\Models\TaxPayerResponse;
 use KianKamgar\MoadianPhp\Services\FiscalInformation;
 use KianKamgar\MoadianPhp\Services\InquiryByReferenceId;
 use KianKamgar\MoadianPhp\Services\InquiryByTime;
@@ -48,7 +48,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function getFiscalInformation(): FiscalInformationResponseModel|array
+    public function getFiscalInformation(): FiscalInformationResponse|array
     {
         return (new FiscalInformation($this->memoryId))
             ->arrayResponse($this->arrayResponse)
@@ -58,7 +58,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function getTaxPayer(): TaxPayerResponseModel|array
+    public function getTaxPayer(): TaxPayerResponse|array
     {
         return (new TaxPayer($this->economicCode))
             ->arrayResponse($this->arrayResponse)
@@ -68,7 +68,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function getInquiryByReferenceIds(array|string $referenceIds, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponseModel|array
+    public function getInquiryByReferenceIds(array|string $referenceIds, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponse|array
     {
         return (new InquiryByReferenceId($referenceIds))
             ->setStart($start)
@@ -80,7 +80,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function getInquiryByUid(array|string $uidList, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponseModel|array
+    public function getInquiryByUid(array|string $uidList, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponse|array
     {
         return (new InquiryByUid($uidList, $this->memoryId))
             ->setStart($start)
@@ -92,7 +92,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function getInquiryByTime(int $pageNumber = 1, int $pageSize = 10, ?string $status = null, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponseModel|array
+    public function getInquiryByTime(int $pageNumber = 1, int $pageSize = 10, ?string $status = null, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponse|array
     {
         return (new InquiryByTime())
             ->setPageNumber($pageNumber)
@@ -103,9 +103,9 @@ class Moadian
             ->request($this->getToken());
     }
 
-    public function createInvoice(InvoiceHeaderResponseModel $header, array $body, array $payments = []): array
+    public function createInvoice(InvoiceHeader $header, array $body, array $payments = []): array
     {
-        return (new InvoiceResponseModel())
+        return (new Invoice())
             ->setHeader($header->setMemoryId($this->memoryId)->getHeader())
             ->setBody($body)
             ->setPayments($payments)
@@ -115,7 +115,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function sendInvoices(array ...$invoices): SendInvoiceResponseModel|array
+    public function sendInvoices(array ...$invoices): SendInvoiceResponse|array
     {
         $serverInformation = $this->getServerInformation();
         $sendInvoice = new SendInvoice(
@@ -134,7 +134,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    public function sendInvoicesWithResponse(array ...$invoices): InquiryArrayResponseModel|array
+    public function sendInvoicesWithResponse(array ...$invoices): InquiryArrayResponse|array
     {
         $serverInformation = $this->getServerInformation();
         $sendInvoice = new SendInvoice(
@@ -149,7 +149,7 @@ class Moadian
             ->request($this->getToken());
 
         $referenceIds = array_map(
-            fn (SendInvoiceResultResponseModel $response) => $response->getReferenceNumber(),
+            fn (SendInvoiceResultResponse $response) => $response->getReferenceNumber(),
             $responses->getResult()
         );
 
@@ -167,7 +167,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    private function getServerInformation(): ServerInformationResponseModel|array
+    private function getServerInformation(): ServerInformationResponse|array
     {
         return (new ServerInformation())
             ->request($this->getToken());
@@ -193,7 +193,7 @@ class Moadian
     /**
      * @throws GuzzleException
      */
-    private function getRandomChallenge(int $timeToLive = 30): RandomChallengeResponseModel
+    private function getRandomChallenge(int $timeToLive = 30): RandomChallengeResponse
     {
         return (new RandomChallenge())
             ->setTimeToLive($timeToLive)

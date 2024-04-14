@@ -4,7 +4,7 @@ namespace KianKamgar\MoadianPhp\Models;
 
 use KianKamgar\MoadianPhp\Interfaces\ResponseModelInterface;
 
-class TaxPayerResponseModel implements ResponseModelInterface
+class TaxPayerResponse implements ResponseModelInterface
 {
     private string $nameTrade;
     private string $taxpayerStatus;
