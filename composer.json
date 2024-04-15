@@ -1,6 +1,6 @@
 {
     "name": "kiankamgar/php-moadian",
-    "description": "PHP SDK for working with tp.tax.gov.ir",
+    "description": "This PHP SDK provides seamless integration with the tp.tax.gov.ir API, also known as Karpoosheh or Moadian. The tp.tax.gov.ir platform offers a range of tax-related functionalities, and this SDK simplifies the process of incorporating those features into your PHP applications.",
     "type": "library",
     "license": "MIT",
     "autoload": {
