@@ -1,4 +1,10 @@
 # PHP Moadian
+<p>
+<a href="https://packagist.org/packages/kiankamgar/php-moadian"><img src="https://img.shields.io/packagist/dt/kiankamgar/php-moadian" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/kiankamgar/php-moadian"><img src="https://img.shields.io/packagist/v/kiankamgar/php-moadian" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/kiankamgar/php-moadian"><img src="https://img.shields.io/packagist/l/kiankamgar/php-moadian" alt="License"></a>
+</p>
+
 PHP SDK for tp.tax.gov.ir API (Karpoosheh/Moadian)
 
 This PHP SDK provides a convenient way to interact with the tp.tax.gov.ir API, also known as Karpoosheh or Moadian. By integrating this SDK into your PHP applications, you can seamlessly access and utilize the functionalities offered by the tp.tax.gov.ir APIs.
