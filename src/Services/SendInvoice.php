@@ -19,6 +19,15 @@ class SendInvoice extends Url
 {
     private RequestHelper $requestHelper;
 
+    /**
+     * Init class
+     *
+     * @param string $privateKey
+     * @param string $x5c
+     * @param string $fiscalId
+     * @param PublicKey $key
+     * @param array $invoices
+     */
     public function __construct(
         private string    $privateKey,
         private string    $x5c,
@@ -34,6 +43,10 @@ class SendInvoice extends Url
     }
 
     /**
+     * Make request
+     *
+     * @param string $token
+     * @return SendInvoiceResponse|array
      * @throws GuzzleException
      * @throws Exception
      */
@@ -44,6 +57,13 @@ class SendInvoice extends Url
             ->post($this->getInvoicePackets());
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): SendInvoice
     {
         $this->requestHelper->arrayResponse($arrayResponse);
@@ -51,6 +71,9 @@ class SendInvoice extends Url
     }
 
     /**
+     * Get invoice packets
+     *
+     * @return array
      * @throws Exception
      */
     private function getInvoicePackets(): array
@@ -66,6 +89,10 @@ class SendInvoice extends Url
     }
 
     /**
+     * Get invoice packet
+     *
+     * @param array $invoice
+     * @return array
      * @throws Exception
      */
     #[ArrayShape(['header' => "array", 'payload' => "string"])]
@@ -81,6 +108,10 @@ class SendInvoice extends Url
     }
 
     /**
+     * Get invoice JWE
+     *
+     * @param array $invoice
+     * @return string
      * @throws Exception
      */
     private function getInvoiceJwe(array $invoice): string
@@ -99,6 +130,10 @@ class SendInvoice extends Url
     }
 
     /**
+     * Get invoice JWS
+     *
+     * @param array $invoice
+     * @return string
      * @throws Exception
      */
     private function getInvoiceJws(array $invoice): string
@@ -113,6 +148,9 @@ class SendInvoice extends Url
     }
 
     /**
+     * Get invoice header
+     *
+     * @return string
      * @throws Exception
      */
     private function getInvoiceHeader(): string
@@ -129,17 +167,32 @@ class SendInvoice extends Url
         return SignHelper::base64url_encode(json_encode($data));
     }
 
+    /**
+     * Get invoice payload
+     *
+     * @param array $invoice
+     * @return string
+     */
     private function getInvoicePayload(array $invoice): string
     {
         return SignHelper::base64url_encode(json_encode($invoice));
     }
 
+    /**
+     * Get invoice signature
+     *
+     * @param string $data
+     * @return string
+     */
     private function getInvoiceSignature(string $data): string
     {
         return SignHelper::signData($data, $this->privateKey, OPENSSL_ALGO_SHA256);
     }
 
     /**
+     * Get SigT
+     *
+     * @return string
      * @throws Exception
      */
     private function getSigT(): string
@@ -148,6 +201,11 @@ class SendInvoice extends Url
             ->format('Y-m-d\TH:i:s\Z');
     }
 
+    /**
+     * Get header
+     *
+     * @return string
+     */
     private function getHeader(): string
     {
         $data = [
@@ -159,6 +217,12 @@ class SendInvoice extends Url
         return SignHelper::base64url_encode(json_encode($data));
     }
 
+    /**
+     * Get encrypted key
+     *
+     * @param string $symmetricKey
+     * @return string
+     */
     private function getEncryptedKey(string $symmetricKey): string
     {
         $rsa = RSA::loadPublicKey($this->key->getKey());
@@ -167,6 +231,15 @@ class SendInvoice extends Url
         return SignHelper::base64url_encode($rsa->encrypt($symmetricKey));
     }
 
+    /**
+     * Get encrypted content
+     *
+     * @param string $symmetricKey
+     * @param string $iv
+     * @param string $header
+     * @param string $invoiceJws
+     * @return string
+     */
     private function getEncryptedContent(string $symmetricKey, string $iv, string $header, string $invoiceJws): string
     {
         $aes = (new AES('gcm'));
@@ -178,11 +251,22 @@ class SendInvoice extends Url
             . SignHelper::base64url_encode($aes->getTag());
     }
 
+    /**
+     * Get random bytes
+     *
+     * @param int $length
+     * @return string
+     */
     private function getRandomBytes(int $length): string
     {
         return openssl_random_pseudo_bytes($length);
     }
 
+    /**
+     * Generate uuid
+     *
+     * @return string
+     */
     private function generateUuid(): string
     {
         $uuid = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',

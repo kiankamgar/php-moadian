@@ -13,6 +13,12 @@ class Invoice
     private array $body = [];
     private array $payments = [];
 
+    /**
+     * Init an invoice header
+     *
+     * @param string $memoryId
+     * @return InvoiceHeader
+     */
     public function header(string $memoryId): InvoiceHeader
     {
         $header = (new InvoiceHeader())
@@ -22,6 +28,11 @@ class Invoice
         return $header;
     }
 
+    /**
+     * Init an invoice body
+     *
+     * @return InvoiceBody
+     */
     public function body(): InvoiceBody
     {
         $body = new InvoiceBody();
@@ -30,6 +41,11 @@ class Invoice
         return $body;
     }
 
+    /**
+     * Init an invoice payment
+     *
+     * @return InvoicePayment
+     */
     public function payment(): InvoicePayment
     {
         $payment = new InvoicePayment();
@@ -38,6 +54,11 @@ class Invoice
         return $payment;
     }
 
+    /**
+     * Build the invoice (must be called at the end of creating Invoice model)
+     *
+     * @return array
+     */
     public function build(): array
     {
         return (new InvoiceModel())

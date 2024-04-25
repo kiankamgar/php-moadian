@@ -10,21 +10,42 @@ class InquiryDataResponse implements ResponseModel
     private array $warning;
     private bool $success;
 
+    /**
+     * Get error
+     *
+     * @return array
+     */
     public function getError(): array
     {
         return $this->error;
     }
 
+    /**
+     * Get warning
+     *
+     * @return array
+     */
     public function getWarning(): array
     {
         return $this->warning;
     }
 
+    /**
+     * Whether the invoice data status is successful
+     *
+     * @return bool
+     */
     public function isSuccess(): bool
     {
         return $this->success;
     }
 
+    /**
+     * Decode response
+     *
+     * @param array $response
+     * @return ResponseModel
+     */
     public function decodeResponse(array $response): ResponseModel
     {
         $this->warning = $response['warning'];

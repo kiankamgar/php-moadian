@@ -23,6 +23,10 @@ class RequestHelper
     }
 
     /**
+     * Make a get request
+     *
+     * @param array|string $requestParams
+     * @return ResponseModel|array
      * @throws GuzzleException
      */
     public function get(array|string $requestParams = []): ResponseModel|array
@@ -36,6 +40,10 @@ class RequestHelper
     }
 
     /**
+     * Make a post request
+     *
+     * @param array $body
+     * @return ResponseModel|array
      * @throws GuzzleException
      */
     public function post(array $body = []): ResponseModel|array
@@ -48,18 +56,37 @@ class RequestHelper
         return $this->getResponse($response);
     }
 
+    /**
+     * Set token
+     *
+     * @param string|null $token
+     * @return $this
+     */
     public function setToken(?string $token): RequestHelper
     {
         $this->token = $token;
         return $this;
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): RequestHelper
     {
         $this->arrayResponse = $arrayResponse;
         return $this;
     }
 
+    /**
+     * Get response
+     *
+     * @param ResponseInterface $response
+     * @return ResponseModel|array
+     */
     private function getResponse(ResponseInterface $response): ResponseModel|array
     {
         $arrayResponse = json_decode($response->getBody()->getContents(), true);
@@ -74,21 +101,43 @@ class RequestHelper
             : $this->getModelResponse($arrayResponse);
     }
 
+    /**
+     * Whether the response status is ok or not
+     *
+     * @param ResponseInterface $response
+     * @return bool
+     */
     private function isOk(ResponseInterface $response): bool
     {
         return !($response->getStatusCode() < 200 || $response->getStatusCode() >= 300);
     }
 
+    /**
+     * Get model response
+     *
+     * @param array $responseArray
+     * @return ResponseModel
+     */
     private function getModelResponse(array $responseArray): ResponseModel
     {
         return (new $this->model())->decodeResponse($responseArray);
     }
 
+    /**
+     * Init the request client
+     *
+     * @return void
+     */
     private function init(): void
     {
         $this->client = new Client();
     }
 
+    /**
+     * Get authorization header
+     *
+     * @return array
+     */
     private function getAuthorizationHeader(): array
     {
         if (empty($this->token)) {

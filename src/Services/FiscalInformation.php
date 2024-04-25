@@ -11,6 +11,11 @@ class FiscalInformation extends Url
 {
     private RequestHelper $requestHelper;
 
+    /**
+     * Init class
+     *
+     * @param string $memoryId
+     */
     public function __construct(
         private string $memoryId
     )
@@ -22,6 +27,10 @@ class FiscalInformation extends Url
     }
 
     /**
+     * Make request
+     *
+     * @param string $token
+     * @return FiscalInformationResponse|array
      * @throws GuzzleException
      */
     public function request(string $token): FiscalInformationResponse|array
@@ -31,6 +40,13 @@ class FiscalInformation extends Url
             ->get(['memoryId' => $this->memoryId]);
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): FiscalInformation
     {
         $this->requestHelper->arrayResponse($arrayResponse);

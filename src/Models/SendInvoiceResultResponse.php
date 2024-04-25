@@ -11,26 +11,52 @@ class SendInvoiceResultResponse implements ResponseModel
     private string $referenceNumber;
     private ?string $data;
 
+    /**
+     * Get uid
+     *
+     * @return string
+     */
     public function getUid(): string
     {
         return $this->uid;
     }
 
+    /**
+     * Get packet type
+     *
+     * @return string|null
+     */
     public function getPacketType(): ?string
     {
         return $this->packetType;
     }
 
+    /**
+     * Get reference number
+     *
+     * @return string
+     */
     public function getReferenceNumber(): string
     {
         return $this->referenceNumber;
     }
 
+    /**
+     * Get data
+     *
+     * @return string|null
+     */
     public function getData(): ?string
     {
         return $this->data;
     }
 
+    /**
+     * Decode response
+     *
+     * @param array $response
+     * @return ResponseModel
+     */
     public function decodeResponse(array $response): ResponseModel
     {
         $this->uid = $response['uid'];

@@ -32,6 +32,12 @@ class VerhoeffAlgorithm
 
     private array $inverseTable = [0, 4, 3, 2, 1, 5, 6, 7, 8, 9];
 
+    /**
+     * Generate check digit
+     *
+     * @param $num
+     * @return string
+     */
     #[Pure]
     public function generateCheckDigit($num): string
     {
@@ -46,6 +52,12 @@ class VerhoeffAlgorithm
         return $this->inverseTable[$c];
     }
 
+    /**
+     * Validate check digit
+     *
+     * @param $num
+     * @return bool
+     */
     #[Pure]
     public function validateCheckDigit($num): bool
     {
@@ -60,6 +72,12 @@ class VerhoeffAlgorithm
         return ($c == 0);
     }
 
+    /**
+     * Convert string to reversed int array
+     *
+     * @param $num
+     * @return array
+     */
     private function stringToReversedIntArray($num): array
     {
         $myArray = [];

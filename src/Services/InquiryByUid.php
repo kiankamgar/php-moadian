@@ -17,6 +17,12 @@ class InquiryByUid extends Url
     private ?DateTime $start = null;
     private ?DateTime $end = null;
 
+    /**
+     * Init class
+     *
+     * @param array|string $uidList
+     * @param string $fiscalId
+     */
     public function __construct(
         private array|string $uidList,
         private string       $fiscalId
@@ -29,6 +35,10 @@ class InquiryByUid extends Url
     }
 
     /**
+     * Make request
+     *
+     * @param string $token
+     * @return InquiryArrayResponse|array
      * @throws GuzzleException
      */
     public function request(string $token): InquiryArrayResponse|array
@@ -38,24 +48,48 @@ class InquiryByUid extends Url
             ->get(Query::build($this->getData()));
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): InquiryByUid
     {
         $this->requestHelper->arrayResponse($arrayResponse);
         return $this;
     }
 
+    /**
+     * Set start datetime
+     *
+     * @param DateTime|null $start
+     * @return $this
+     */
     public function setStart(?DateTime $start): InquiryByUid
     {
         $this->start = $start;
         return $this;
     }
 
+    /**
+     * Set end datetime
+     *
+     * @param DateTime|null $end
+     * @return $this
+     */
     public function setEnd(?DateTime $end): InquiryByUid
     {
         $this->end = $end;
         return $this;
     }
 
+    /**
+     * Get data for request
+     *
+     * @return array
+     */
     #[ArrayShape(['uidList' => "array", 'fiscalId' => "string", 'end' => "string", 'start' => "string"])]
     private function getData(): array
     {

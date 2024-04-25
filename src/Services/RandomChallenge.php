@@ -12,6 +12,9 @@ class RandomChallenge extends Url
     private int $timeToLive = 30;
     private RequestHelper $requestHelper;
 
+    /**
+     * Init class
+     */
     public function __construct()
     {
         $this->requestHelper = new RequestHelper(
@@ -21,6 +24,9 @@ class RandomChallenge extends Url
     }
 
     /**
+     * Make request
+     *
+     * @return RandomChallengeResponse|array
      * @throws GuzzleException
      */
     public function request(): RandomChallengeResponse|array
@@ -28,12 +34,25 @@ class RandomChallenge extends Url
         return $this->requestHelper->get(['timeToLive' => $this->timeToLive]);
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): RandomChallenge
     {
         $this->requestHelper->arrayResponse($arrayResponse);
         return $this;
     }
 
+    /**
+     * Set time to live
+     *
+     * @param int $timeToLive
+     * @return $this
+     */
     public function setTimeToLive(int $timeToLive): RandomChallenge
     {
         $this->timeToLive = $timeToLive;

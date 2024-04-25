@@ -28,8 +28,15 @@ class Moadian
     private string $privateKey;
     private string $certificate;
     private bool $arrayResponse = false;
+    private int $timeToLive = 30;
 
     /**
+     * Get fiscal information
+     *
+     * @param string $privateKeyPath
+     * @param string $certificatePath
+     * @param string $memoryId
+     * @param string $economicCode
      * @throws Exception
      */
     public function __construct(
@@ -44,6 +51,9 @@ class Moadian
     }
 
     /**
+     * Get fiscal information
+     *
+     * @return FiscalInformationResponse|array
      * @throws GuzzleException
      */
     public function getFiscalInformation(): FiscalInformationResponse|array
@@ -54,6 +64,9 @@ class Moadian
     }
 
     /**
+     * Get taxpayer information
+     *
+     * @return TaxPayerResponse|array
      * @throws GuzzleException
      */
     public function getTaxPayer(): TaxPayerResponse|array
@@ -64,6 +77,12 @@ class Moadian
     }
 
     /**
+     * Get sent invoices inquiry by reference id(s)
+     *
+     * @param array|string $referenceIds
+     * @param DateTime|null $start
+     * @param DateTime|null $end
+     * @return InquiryArrayResponse|array
      * @throws GuzzleException
      */
     public function getInquiryByReferenceIds(array|string $referenceIds, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponse|array
@@ -76,6 +95,12 @@ class Moadian
     }
 
     /**
+     * Get sent invoices inquiry by reference uid(s)
+     *
+     * @param array|string $uidList
+     * @param DateTime|null $start
+     * @param DateTime|null $end
+     * @return InquiryArrayResponse|array
      * @throws GuzzleException
      */
     public function getInquiryByUid(array|string $uidList, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponse|array
@@ -88,6 +113,14 @@ class Moadian
     }
 
     /**
+     * Get sent invoices inquiry by time
+     *
+     * @param int $pageNumber
+     * @param int $pageSize
+     * @param string|null $status
+     * @param DateTime|null $start
+     * @param DateTime|null $end
+     * @return InquiryArrayResponse|array
      * @throws GuzzleException
      */
     public function getInquiryByTime(int $pageNumber = 1, int $pageSize = 10, ?string $status = null, ?DateTime $start = null, ?DateTime $end = null): InquiryArrayResponse|array
@@ -102,6 +135,10 @@ class Moadian
     }
 
     /**
+     * Send invoice(s) to Karpoosheh
+     *
+     * @param array ...$invoices
+     * @return SendInvoiceResponse|array
      * @throws GuzzleException
      */
     public function sendInvoices(array ...$invoices): SendInvoiceResponse|array
@@ -121,6 +158,11 @@ class Moadian
     }
 
     /**
+     * Send invoice(s) to Karpoosheh and get inquiry of each as well
+     * (must wait at least 10 seconds to get inquiries)
+     *
+     * @param array ...$invoices
+     * @return InquiryArrayResponse|array
      * @throws GuzzleException
      */
     public function sendInvoicesWithResponse(array ...$invoices): InquiryArrayResponse|array
@@ -147,18 +189,44 @@ class Moadian
         return $this->getInquiryByReferenceIds($referenceIds);
     }
 
+    /**
+     * Get response of each request in array form instead of model class
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse = true): Moadian
     {
         $this->arrayResponse = $arrayResponse;
         return $this;
     }
 
+    /**
+     * Get memory id
+     *
+     * @return string
+     */
     public function getMemoryId(): string
     {
         return $this->memoryId;
     }
 
     /**
+     * Set random challenge time to live (default is 30 seconds)
+     *
+     * @param int $timeToLive
+     * @return Moadian
+     */
+    public function setTimeToLive(int $timeToLive): Moadian
+    {
+        $this->timeToLive = $timeToLive;
+        return $this;
+    }
+
+    /**
+     * Get server information
+     *
+     * @return ServerInformationResponse|array
      * @throws GuzzleException
      */
     private function getServerInformation(): ServerInformationResponse|array
@@ -168,6 +236,9 @@ class Moadian
     }
 
     /**
+     * Get token
+     *
+     * @return string
      * @throws GuzzleException
      * @throws Exception
      */
@@ -185,12 +256,15 @@ class Moadian
     }
 
     /**
+     * Get random challenge
+     *
+     * @return RandomChallengeResponse
      * @throws GuzzleException
      */
-    private function getRandomChallenge(int $timeToLive = 30): RandomChallengeResponse
+    private function getRandomChallenge(): RandomChallengeResponse
     {
         return (new RandomChallenge())
-            ->setTimeToLive($timeToLive)
+            ->setTimeToLive($this->timeToLive)
             ->request();
     }
 }

@@ -9,6 +9,14 @@ use KianKamgar\MoadianPhp\Helpers\SignHelper;
 
 class SignNonce
 {
+    /**
+     * Init class
+     *
+     * @param string $privateKey
+     * @param string $x5c
+     * @param string $nonce
+     * @param string $clientId
+     */
     public function __construct(
         private string $privateKey,
         private string $x5c,
@@ -18,6 +26,9 @@ class SignNonce
     {}
 
     /**
+     * Get token
+     *
+     * @return string
      * @throws Exception
      */
     public function getToken(): string
@@ -31,6 +42,9 @@ class SignNonce
     }
 
     /**
+     * Get header
+     *
+     * @return string
      * @throws Exception
      */
     private function getHeader(): string
@@ -47,6 +61,11 @@ class SignNonce
         return SignHelper::base64url_encode(json_encode($data));
     }
 
+    /**
+     * Get payload
+     *
+     * @return string
+     */
     private function getPayload(): string
     {
         $data = [
@@ -57,12 +76,21 @@ class SignNonce
         return SignHelper::base64url_encode(json_encode($data));
     }
 
+    /**
+     * Get signature
+     *
+     * @param string $data
+     * @return string
+     */
     private function getSignature(string $data): string
     {
         return SignHelper::signData($data, $this->privateKey, OPENSSL_ALGO_SHA256);
     }
 
     /**
+     * Get SigT
+     *
+     * @return string
      * @throws Exception
      */
     private function getSigT(): string

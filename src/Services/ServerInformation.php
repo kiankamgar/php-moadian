@@ -11,6 +11,9 @@ class ServerInformation extends Url
 {
     private RequestHelper $requestHelper;
 
+    /**
+     * Init class
+     */
     public function __construct()
     {
         $this->requestHelper = new RequestHelper(
@@ -20,6 +23,10 @@ class ServerInformation extends Url
     }
 
     /**
+     * Make request
+     *
+     * @param string $token
+     * @return ServerInformationResponse|array
      * @throws GuzzleException
      */
     public function request(string $token): ServerInformationResponse|array
@@ -29,6 +36,13 @@ class ServerInformation extends Url
             ->get();
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): ServerInformation
     {
         $this->requestHelper->arrayResponse($arrayResponse);

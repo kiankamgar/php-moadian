@@ -17,6 +17,11 @@ class InquiryByReferenceId extends Url
     private ?DateTime $end = null;
     private RequestHelper $requestHelper;
 
+    /**
+     * Init class
+     *
+     * @param array|string $referenceIds
+     */
     public function __construct(
         private array|string $referenceIds
     )
@@ -28,6 +33,10 @@ class InquiryByReferenceId extends Url
     }
 
     /**
+     * Make request
+     *
+     * @param string $token
+     * @return InquiryArrayResponse|array
      * @throws GuzzleException
      */
     public function request(string $token): InquiryArrayResponse|array
@@ -37,24 +46,48 @@ class InquiryByReferenceId extends Url
             ->get(Query::build($this->getData()));
     }
 
+    /**
+     * Determine whether you want to get the result in array form
+     * (otherwise the request will return a model)
+     *
+     * @param bool $arrayResponse
+     * @return $this
+     */
     public function arrayResponse(bool $arrayResponse): InquiryByReferenceId
     {
         $this->requestHelper->arrayResponse($arrayResponse);
         return $this;
     }
 
+    /**
+     * Set start datetime
+     *
+     * @param DateTime|null $start
+     * @return $this
+     */
     public function setStart(?DateTime $start): InquiryByReferenceId
     {
         $this->start = $start;
         return $this;
     }
 
+    /**
+     * Set end datetime
+     *
+     * @param DateTime|null $end
+     * @return $this
+     */
     public function setEnd(?DateTime $end): InquiryByReferenceId
     {
         $this->end = $end;
         return $this;
     }
 
+    /**
+     * Get data for request
+     *
+     * @return array
+     */
     #[ArrayShape(['referenceIds' => "array|array[]|string|string[]", 'end' => "string", 'start' => "string"])]
     private function getData(): array
     {
