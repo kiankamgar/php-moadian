@@ -272,8 +272,46 @@ class InvoiceHeader
         return $objects;
     }
 
+    public function getIndatim(): ?int
+    {
+        return $this->indatim;
+    }
+
+    public function setIndatim(?int $indatim): InvoiceHeader
+    {
+        $this->indatim = $indatim;
+        return $this;
+    }
+
+    public function getInno(): string
+    {
+        return $this->inno;
+    }
+
+    public function setInno(string $inno): InvoiceHeader
+    {
+        $this->inno = $inno;
+        return $this;
+    }
+
+    public function getTaxid(): string
+    {
+        return $this->taxid;
+    }
+
+    public function setTaxid(string $taxid): InvoiceHeader
+    {
+        $this->taxid = $taxid;
+        return $this;
+    }
+
     private function init()
     {
+        if (!empty($this->taxid)) {
+
+            return;
+        }
+
         $serial = mt_rand(1, 1000000000);
         $now = new DateTime();
         $this->taxid = $this->generateTaxId($serial, $now);
